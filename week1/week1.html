@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do-list</title>
+    <link rel="stylesheet" href="week1.css">
+</head>
+
+<body class="todo">
+    <header id="title">
+        <div>
+            <p>UMC STUDY PLAN</p>
+            <hr id="hr">
+        </div>
+    </header>
+    <div class="sendListBox">
+        <input type="text" id="List" placeholder="해야 할 일을 적어주세요ㅠㅠ">
+    </div>
+
+    
+    <div class="container">
+        <div>
+            <h3 id="mustTitle">해야 할 일</h3>
+            <div id="todolist"></div>
+        </div>
+        <div>
+            <h3 id="doneTitle">해낸 일</h3>
+            <div id="donelist"></div>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const inputBox = document.querySelector('#List'); 
+            const todoList = document.querySelector('#todolist'); 
+            const doneList = document.querySelector('#donelist');
+
+        
+            inputBox.addEventListener('keydown',function(e){
+                if (e.key ==='Enter'){
+                    const task = inputBox.value.trim();
+                    if(task !== ''){
+                        addTask(task);
+                        inputBox.value = ''; 
+                    }
+                }
+            })
+            function addTask(task){
+                const added = document.createElement('div');
+                added.classList.add('added');
+            
+                const addedText = document.createElement('span');
+                addedText.textContent = task;
+                added.appendChild(addedText);
+
+                const sucBtn = document.createElement('button');
+                sucBtn.classList.add('sucBtn'); 
+                sucBtn.textContent = '완료';
+                added.appendChild(sucBtn);
+
+                sucBtn.addEventListener('click',function(){
+                MoveTo(added,task)
+                });
+                todoList.insertBefore(added, todoList.childNodes[0]); //자식노드 맨 위에 추가
+            };
+
+            function MoveTo(added,task){
+                todoList.removeChild(added);
+
+                const doneTask = document.createElement('div');
+                doneTask.classList.add('doneTask');
+
+                const doneText = document.createElement('span');
+                doneText.textContent = task;
+                doneTask.appendChild(doneText);
+
+                const delBtn = document.createElement('button');
+                delBtn.textContent = '삭제';
+                delBtn.classList.add('delBtn');
+                doneTask.appendChild(delBtn);
+
+                delBtn.addEventListener('click',function(){
+                    doneList.removeChild(doneTask)
+                });
+                doneList.appendChild(doneTask)
+            };
+        });
+    </script>
+</body>
+
+</html>
