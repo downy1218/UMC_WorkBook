@@ -10,4 +10,4 @@ function Input({ value, onChange}) {
     )
   };
   
-export default InputBox;
+export default Input;
