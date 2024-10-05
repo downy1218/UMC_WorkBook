@@ -14,6 +14,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<RootLayout />}>
+            <Route index element={<Poster />}></Route>
             <Route path='login' element={<LoginPage />}></Route>
             <Route path='register' element={<RegisterPage />}></Route>
             <Route path='search' element={<SearchPage/>}></Route>
@@ -21,7 +22,7 @@ function App() {
           </Route>
         </Routes>
       </BrowserRouter>
-      <Poster/>
+      
 
     </>
   )
