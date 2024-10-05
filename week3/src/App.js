@@ -5,6 +5,8 @@ import {  Route, Link, Routes, BrowserRouter, useNavigate } from 'react-router-d
 import LoginPage from './Pages/Login.js';
 import RegisterPage from './Pages/Register.js';
 import RootLayout from './layout/root-layout.js';
+import SearchPage from './Pages/Search.js';
+import SearchMoviePage from './Pages/SearchMovie.js';
 
 function App() {
   return (
@@ -14,10 +16,12 @@ function App() {
           <Route path='/' element={<RootLayout />}>
             <Route path='login' element={<LoginPage />}></Route>
             <Route path='register' element={<RegisterPage />}></Route>
+            <Route path='search' element={<SearchPage/>}></Route>
+            <Route path='searchMovie' element={<SearchMoviePage/>}></Route>
           </Route>
         </Routes>
       </BrowserRouter>
-      {/* <Poster/> */}
+      <Poster/>
 
     </>
   )
