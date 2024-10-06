@@ -1,7 +1,14 @@
+import './Category.css';
+
+
 function SearchMoviePage(){
     return(
+        <div className='cate-container'>
+            <div>
+                <p style={{color:'white'}}>카테고리</p>
+            </div>
+        </div>
         
-        <p style={{color:'white'}}>영화 페이지 입니다</p>
         
     )
 }

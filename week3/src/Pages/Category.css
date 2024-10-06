@@ -1,0 +1,8 @@
+.cate-container{
+    width: 500px;
+    height: 100%;;
+    /* background-color: grey; */
+    display: flex;
+    justify-content: end;
+    margin-left: 500px;
+}

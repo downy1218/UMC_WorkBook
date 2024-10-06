@@ -10,13 +10,18 @@ const MoviePosters = () => {
 
   const GridContainerStyle = styled.div`
     display: grid;
-    margin-top:150px;
+    margin-top:0px;
     grid-template-columns: repeat(10, 1fr); 
-    gap: 10px; // 포스터 위 아래 줄 사이 간격
-    padding:8px
+    gap: 30px; // 포스터 위 아래 줄 사이 간격
+    padding:8px;
     `;
-    
 
+  const PosterContainer = styled.div`
+    // width: 100px; 
+    display: flex;
+    flex-direction: column; 
+    align-items: center;
+  `;
   const PosterStyle = styled.div`
     position: relative;
     width: 100px; // 포스터 크기
@@ -27,9 +32,9 @@ const MoviePosters = () => {
     justify-content:center;
     align-items: center;
   `;
- 
 
-  const OverlayStyle =styled.div`
+
+  const OverlayStyle = styled.div`
     position:absolute; //상대 위치를 기준으로 div요소가 0 0 0 0만큼 위치
     top: 0;
     left: 0;
@@ -40,28 +45,41 @@ const MoviePosters = () => {
     transition: opacity 0.1s ease;
   `;
 
+  const MovieInfo = styled.div`
+    color:white;
+  `
+
   return (
     <div style={{
       display: 'flex',
-      justifyContent: 'center', // 수평 중앙 정렬
-      }}>
+      justifyContent: 'center',
+      marginLeft: '120px',
+      marginTop: '0'
+    }}>
       <GridContainerStyle>
         {MOVIES.results.map((movie, index) => (
-          <PosterStyle
-            key={movie.id}
-            onMouseEnter={() => setHoveredIndex(index)}
-            onMouseLeave={() => setHoveredIndex(null)}
-          >
-            <img
-              src={`${baseUrl}${movie.poster_path}`}
-              alt={movie.original_title}
-              style={{ width: '100%', height: '100%' }} // 이미지가 부모의 크기를 가득 채우도록
-            />
-            <OverlayStyle style={{ opacity: hoveredIndex === index ? 1 : 0 }}/>
-          </PosterStyle>
+          <PosterContainer key={movie.id}>
+            <PosterStyle
+              title = {movie.title}
+              date = {movie.release_date}
+              onMouseEnter={() => setHoveredIndex(index)}
+              onMouseLeave={() => setHoveredIndex(null)}
+            >
+              <MovieInfo>
+                <div style={{fontSize:'15px'}}>{movie.title}</div>
+                <div style={{fontSize:'10px'}}>{movie.release_date}</div>
+              </MovieInfo>
+              <img
+                src={`${baseUrl}${movie.poster_path}`}
+                alt={movie.original_title}
+                style={{ width: '100%', height: '100%' }} // 이미지가 부모의 크기를 가득 채우도록
+              />
+              <OverlayStyle style={{ opacity: hoveredIndex === index ? 1 : 0 }}/>
+            </PosterStyle>
+          </PosterContainer>
         ))}
-      </GridContainerStyle>
-    </div>
+    </GridContainerStyle>
+    </div >
   );
 };
 

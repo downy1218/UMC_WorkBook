@@ -39,9 +39,11 @@
 #nav-btn2{
     background-color: rgb(255, 71, 71);
     color: white;
-    background: none;
     border: none;
     cursor: pointer;
+    border-radius: 7px;
+    padding-bottom: 1px;
+    height: 25px;
 }
 #nav-btn2:hover{
     background-color: rgb(255, 255, 255);
