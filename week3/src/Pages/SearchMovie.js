@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './Category.css';
+import { useNavigate } from 'react-router-dom';
 
 
 function SearchMoviePage(){
@@ -17,7 +18,9 @@ function SearchMoviePage(){
             title:'개봉 예정중인'
         }
     ]);
-    
+    const navigate = useNavigate();
+
+
     return(
         <div>
             <div className='cate-container'>
@@ -27,13 +30,21 @@ function SearchMoviePage(){
                 {
                     category.map((category,index)=>{
                         return(
-                            <div key={category.id}>
+                            <div key={category.id} onClick = {()=>{
+                                navigate(
+                                    category.id ===1 ? 'movie/playing' :
+                                    category.id ===2 ? 'movie/popular' :
+                                    category.id ===3 ? 'movie/top' :
+                                    category.id ===4 ? 'movie/upcoming' : '/'                   
+                                )
+                            }}>
                                 <img className='images' src ={`photo${index+1}.png`}></img>
                                 <p className='categoty-name'>{category.title}</p>
                             </div>
                         )
                     })
                 }
+
             </div>
         </div>
         

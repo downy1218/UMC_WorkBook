@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect,useState } from 'react';
 import { MOVIES } from '../mocks/movie.js';
 import './Poster.css';
 import styled from 'styled-components';
+import axios from 'axios';
 
 const MoviePosters = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
