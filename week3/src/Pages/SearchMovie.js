@@ -6,16 +6,20 @@ import { useNavigate } from 'react-router-dom';
 function SearchMoviePage(){
     const [category,setCategory] = useState([
         {   id:'1',
-            title:'현재 상영중인'
+            title:'현재 상영중인',
+            path:'now_playing'
         },
         {   id:'2',
-            title:'인기있는' 
+            title:'인기있는',
+            path:'popular'
         },
         {   id:'3',
-            title:'높은 평가를 받은'
+            title:'높은 평가를 받은',
+            path:'top_rated'
         },
         {   id:'4',
-            title:'개봉 예정중인'
+            title:'개봉 예정중인',
+            path:'upcoming'
         }
     ]);
     const navigate = useNavigate();
@@ -32,14 +36,11 @@ function SearchMoviePage(){
                         return(
                             <div key={category.id} onClick = {()=>{
                                 navigate(
-                                    category.id ===1 ? 'movie/playing' :
-                                    category.id ===2 ? 'movie/popular' :
-                                    category.id ===3 ? 'movie/top' :
-                                    category.id ===4 ? 'movie/upcoming' : '/'                   
+                                    `/movie/${category.path}`               
                                 )
                             }}>
                                 <img className='images' src ={`photo${index+1}.png`}></img>
-                                <p className='categoty-name'>{category.title}</p>
+                                <p className='category-name'>{category.title}</p>
                             </div>
                         )
                     })

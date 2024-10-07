@@ -5,10 +5,7 @@ import RegisterPage from './Pages/Register.js';
 import RootLayout from './layout/root-layout.js';
 import SearchPage from './Pages/Search.js';
 import SearchMoviePage from './Pages/SearchMovie.js';
-import UpComing from './Pages/Up-coming.js';
-import Playing from './Pages/Playing.js';
-import Popular from './Pages/Popular.js';
-import Top from './Pages/Top-rated.js';
+import MovieDetail from './Pages/MovieDetail.js';
 
 function App() {
   return (
@@ -22,10 +19,8 @@ function App() {
             <Route path='search' element={<SearchPage/>}></Route>
             <Route path='searchMovie' element={<SearchMoviePage/>}></Route>
 
-            <Route path='movie/playing' element={<Playing/>}></Route>
-            <Route path='movie/popular' element={<Popular/>}></Route>
-            <Route path='movie/top' element={<Top/>}></Route>
-            <Route path='movie/upcoming' element={<UpComing/>}></Route>
+
+            <Route path="/movie/:category" element={<MovieDetail />} />
           </Route>
         </Routes>
       </BrowserRouter> 
