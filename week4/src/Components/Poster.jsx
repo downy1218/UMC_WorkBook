@@ -30,15 +30,17 @@ const MoviePosters = () => {
               <img
                 src={`${baseUrl}${movie.poster_path}`}
                 alt={movie.original_title}
-                style={{ width: '120px', height: '150px' }} // 이미지가 부모의 크기를 가득 채우도록
+                style={{ width: '100px', height: '150px', objectFit : 'cover', aspectRatio: '3/4', marginBottom: '10px', borderRadius: '10px' }} // 이미지가 부모의 크기를 가득 채우도록
               />
+              
+              <P.OverlayStyle style={{ opacity: hoveredIndex === index ? 1 : 0 }}/>
+            </P.PosterStyle>
+
               <P.MovieInfo>
                 <div style={{fontSize:'15px'}}>{movie.title}</div>
                 <div style={{fontSize:'10px'}}>{movie.release_date}</div>
               </P.MovieInfo>
-              
-              <P.OverlayStyle style={{ opacity: hoveredIndex === index ? 1 : 0 }}/>
-            </P.PosterStyle>
+
           </P.PosterContainer>
         ))}
     </P.GridContainerStyle>

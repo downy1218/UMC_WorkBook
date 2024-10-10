@@ -49,3 +49,12 @@ export const NavBtn2 = styled.button`
         color: rgb(255, 71, 71);
     }
 `
+export const SideBarStyle = styled.div`
+    width:80px;
+    height: auto;
+    color:white;
+    cursor:pointer;
+    margin-top:30px;
+
+
+`

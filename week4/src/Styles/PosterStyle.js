@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const GridContainerStyle = styled.div`
     display: grid;
-    grid-template-columns: repeat(10, 1fr); 
+    grid-template-columns: repeat(9, 1fr); 
     margin-top:0px;
     gap: 30px; // 포스터 위 아래 줄 사이 간격
     padding:8px;
@@ -12,20 +12,19 @@ export const PosterContainer = styled.div`
     // width: 100px; 
     display: flex;
     flex-direction: column; 
-    align-items: center;
+    // align-items: center;
 `
 export const PosterStyle = styled.div`
     position: relative;
-    width: 100px; // 포스터 크기
-    // overflow: hidden;
-    border-radius: 10px;
+    width: 100%; // 포스터 크기
+    //overflow: hidden;
     display: flex;
     justify-content:center;
     align-items: center;
 `
 
 export const OverlayStyle = styled.div`
-    position:absolute; //상대 위치를 기준으로 div요소가 0 0 0 0만큼 위치
+    position:absolute; 
     top: 0;
     left: 0;
     right: 0;

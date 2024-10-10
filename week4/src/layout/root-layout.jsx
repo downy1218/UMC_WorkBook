@@ -8,7 +8,7 @@ const RootLayout = () => {
         <>
             <Nav/>
             <SideBar/>
-            <div style={{paddingLeft:'80px',paddingTop:'0px'}}>
+            <div style={{paddingLeft:'20px',paddingTop:'0px'}}>
                 <Outlet/>
             </div>
             
