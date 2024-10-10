@@ -56,7 +56,7 @@ function MovieDetail(){
             const response = await axios.get(`https://api.themoviedb.org/3/movie/${category}?language=ko-KR&page=1`,{
                 headers: {
                     Authorization: 
-                    `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4NzUxZmQ1NzczMTNmMjVmYzQ0YWIwNWRiODY5NzU4ZSIsIm5iZiI6MTcyODI0MTU2NS44NTkzNzEsInN1YiI6IjY3MDJkMGRlZTQ4MDE0OTE0Njg1YWUwMyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.4eASdIMY1xRwkrTPuzZzS7X7FmFAo8KRZ1yM9POuNHE`
+                    `Bearer ${import.meta.env.VITE_TMDM_TOKEN}`
                 }
             })
             console.log(response.data);
