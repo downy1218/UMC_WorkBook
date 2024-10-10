@@ -9,7 +9,7 @@ function MovieDetail(){
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  const GridContainerStyle = styled.div`
+  const GridContainerStyle1 = styled.div`
     display: grid;
     margin-top:0px;
     grid-template-columns: repeat(10, 1fr); 
@@ -17,13 +17,13 @@ function MovieDetail(){
     padding:8px;
     `;
 
-  const PosterContainer = styled.div`
+  const PosterContainer1 = styled.div`
     // width: 100px; 
     display: flex;
     flex-direction: column; 
     align-items: center;
   `;
-  const PosterStyle = styled.div`
+  const PosterStyle1 = styled.div`
     position: relative;
     width: 100px; // 포스터 크기
     // height: 180px;
@@ -34,7 +34,7 @@ function MovieDetail(){
   `;
 
 
-  const OverlayStyle = styled.div`
+  const OverlayStyle1 = styled.div`
     position:absolute; //상대 위치를 기준으로 div요소가 0 0 0 0만큼 위치
     top: 0;
     left: 0;
@@ -45,7 +45,7 @@ function MovieDetail(){
     transition: opacity 0.1s ease;
   `;
 
-  const MovieInfo = styled.div`
+  const MovieInfo1 = styled.div`
     color:white;
   `
 
@@ -78,10 +78,10 @@ function MovieDetail(){
             marginLeft: '120px',
             marginTop: '0'
           }}>
-            <GridContainerStyle>
+            <GridContainerStyle1>
               {movie.map((movie, index) => (
-                <PosterContainer key={movie.id}>
-                  <PosterStyle
+                <PosterContainer1 key={movie.id}>
+                  <PosterStyle1
                     title = {movie.title}
                     date = {movie.release_date}
                     onMouseEnter={() => setHoveredIndex(index)}
@@ -93,15 +93,15 @@ function MovieDetail(){
                       alt={movie.original_title}
                       style={{ width: '100px', height: '150px', objectFit : 'cover', aspectRatio: '3/4', marginBottom: '10px', borderRadius: '10px'}} // 이미지가 부모의 크기를 가득 채우도록
                     />
-                    <MovieInfo>
+                    <MovieInfo1>
                       <div style={{fontSize:'15px'}}>{movie.title}</div>
                       <div style={{fontSize:'10px'}}>{movie.release_date}</div>
-                    </MovieInfo>
-                    <OverlayStyle style={{ opacity: hoveredIndex === index ? 1 : 0 }}/>
-                  </PosterStyle>
-                </PosterContainer>
+                    </MovieInfo1>
+                    <OverlayStyle1 style={{ opacity: hoveredIndex === index ? 1 : 0 }}/>
+                  </PosterStyle1>
+                </PosterContainer1>
               ))}
-          </GridContainerStyle>
+          </GridContainerStyle1>
           </div >
     )
 };

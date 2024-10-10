@@ -1,8 +1,7 @@
-import React, { useEffect,useState } from 'react';
+import React, { useState } from 'react';
 import { MOVIES } from '../mocks/movie.js';
 import './Poster.css';
 import styled from 'styled-components';
-import axios from 'axios';
 
 const MoviePosters = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
@@ -26,8 +25,7 @@ const MoviePosters = () => {
   const PosterStyle = styled.div`
     position: relative;
     width: 100px; // 포스터 크기
-    height: 180px;
-    overflow: hidden;
+    // overflow: hidden;
     border-radius: 10px;
     display: felx;
     justify-content:center;
@@ -73,8 +71,9 @@ const MoviePosters = () => {
               <img
                 src={`${baseUrl}${movie.poster_path}`}
                 alt={movie.original_title}
-                style={{ width: '100%', height: '100%' }} // 이미지가 부모의 크기를 가득 채우도록
+                style={{ width: '120px', height: '150px' }} // 이미지가 부모의 크기를 가득 채우도록
               />
+              
               <OverlayStyle style={{ opacity: hoveredIndex === index ? 1 : 0 }}/>
             </PosterStyle>
           </PosterContainer>
