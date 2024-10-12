@@ -4,28 +4,32 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 import * as M from '../Styles/CategoryStyle.js';
 import { axiosInstance } from '../Apis/axios-instance.js';
+import useCustomFetch from '../Hooks/useCustomFetch.js';
 
 function MovieDetail(){
     const { category } = useParams();
-    const [movie, setMovie] = useState([]);
+    // const [movie, setMovie] = useState([]);
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
     const [hoveredIndex, setHoveredIndex] = useState(null);
 
 
 
-    useEffect(() => {
-        const GetMovieData = async () => {
-          try {
-            const response = await axiosInstance.get(`/movie/${category}?language=ko-KR&page=1`)
-            setMovie(response.data.results);
-          } catch (error) {
-            console.error("Error fetching movie data:", error);
-          }
-        };
-        GetMovieData(movie);
-        
-    }, [category]);
+    const {isError,isLoading,movie} = useCustomFetch(`/movie/${category}?language=ko-KR&page=1`)
 
+    if(isLoading){
+      return(
+      <div style={{color:'white'}}>
+        <h1>loading...</h1>
+      </div>
+      )
+    }
+    if(isError){
+      return(
+      <div style={{color:'red'}}>
+        <h1>Error</h1>
+      </div>
+      )
+    }
 
 
     return(
