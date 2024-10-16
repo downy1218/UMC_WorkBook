@@ -7,7 +7,7 @@ import * as S from '../Styles/NavStyle';
 function SideBar(){
     const navigate = useNavigate();
     const gotoSearch = ()=>{navigate('search')};
-    const gotoSearchMovie = ()=>{navigate('searchMovie')};
+    const gotoSearchMovie = ()=>{navigate('category')};
 
     return(
         <S.SideBarStyle >

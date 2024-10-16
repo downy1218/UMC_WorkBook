@@ -3,7 +3,7 @@ import './Category.css';
 import { useNavigate } from 'react-router-dom';
 
 
-function SearchMoviePage(){
+function CategoryPage(){
     const [category,setCategory] = useState([
         {   id:'1',
             title:'현재 상영중인',
@@ -52,4 +52,4 @@ function SearchMoviePage(){
         
     )
 }
-export default SearchMoviePage;
+export default CategoryPage;

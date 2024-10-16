@@ -4,8 +4,9 @@ import LoginPage from './Pages/Login.jsx';
 import RegisterPage from './Pages/Register.jsx';
 import RootLayout from './layout/root-layout.jsx';
 import SearchPage from './Pages/Search.jsx';
-import SearchMoviePage from './Pages/SearchMovie.jsx';
+import CategoryPage from './Pages/Category.jsx';
 import MovieDetail from './Pages/MovieDetail.jsx';
+import DetailInfo from './Pages/DetailInfo.jsx';
 
 function App() {
   return (
@@ -17,10 +18,11 @@ function App() {
             <Route path='login' element={<LoginPage />}></Route>
             <Route path='register' element={<RegisterPage />}></Route>
             <Route path='search' element={<SearchPage/>}></Route>
-            <Route path='searchMovie' element={<SearchMoviePage/>}></Route>
+            <Route path='category' element={<CategoryPage/>}></Route>
 
 
             <Route path="/movie/:category" element={<MovieDetail />} />
+            <Route path="/movie/temp" element={<DetailInfo />} />
           </Route>
         </Routes>
       </BrowserRouter> 
