@@ -5,27 +5,29 @@ import axios from 'axios';
 import * as M from '../Styles/CategoryStyle.js';
 import { axiosInstance } from '../Apis/axios-instance.js';
 import useCustomFetch from '../Hooks/useCustomFetch.js';
+import { useNavigate } from 'react-router-dom';
+import { TiArrowBack } from "react-icons/ti";
 
 function MovieDetail(){
-    const { category } = useParams();
+    const { category,movie_id } = useParams();
     // const [movie, setMovie] = useState([]);
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
     const [hoveredIndex, setHoveredIndex] = useState(null);
-
-
+    const navigate = useNavigate();
+    const gotoInfo = ()=>{navigate(`/movie/:${category}/:${movie_id}`)};
 
     const {isError,isLoading,movie} = useCustomFetch(`/movie/${category}?language=ko-KR&page=1`)
 
     if(isLoading){
       return(
-      <div style={{color:'white'}}>
+      <div style={{color:'white',fontSize:'20px', marginLeft:'150px'}}>
         <h1>loading...</h1>
       </div>
       )
     }
     if(isError){
       return(
-      <div style={{color:'red'}}>
+      <div style={{color:'red',fontSize:'20px', marginLeft:'150px'}}>
         <h1>Error</h1>
       </div>
       )
@@ -39,14 +41,20 @@ function MovieDetail(){
             marginLeft: '120px',
             marginTop: '0'
           }}>
+            <div style={{transform:'translateY(-70px) translateX(+40px)'}}>
+              <TiArrowBack style={{color:'white',fontSize:'32px',cursor:'pointer'}} onClick={()=>navigate('/category')}/>
+            </div>
             <M.GridContainerStyle1>
               {movie.map((movie, index) => (
                 <M.PosterContainer1 key={movie.id}>
                   <M.PosterStyle1
                     title = {movie.title}
                     date = {movie.release_date}
+                    overview={movie.overview}
+                    movieID={movie.id}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
+                    onClick={()=>gotoInfo()}
                   >
                     
                     <img
@@ -63,7 +71,7 @@ function MovieDetail(){
                 </M.PosterContainer1>
               ))}
           </M.GridContainerStyle1>
-          </div >
+        </div >
     )
 };
 export default MovieDetail;
