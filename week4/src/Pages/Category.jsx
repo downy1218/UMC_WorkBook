@@ -34,7 +34,7 @@ function CategoryPage(){
                 {
                     category.map((category,index)=>{
                         return(
-                            <div key={category.id} onClick = {()=>{
+                            <div key={category.id} className="category-item" onClick = {()=>{
                                 navigate(
                                     `/movie/${category.path}`               
                                 )

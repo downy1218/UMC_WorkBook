@@ -1,3 +1,6 @@
+.category-item{
+    position: relative;
+}
 .cate-container{
     width: 500px;
     height: 100%;;
@@ -24,11 +27,9 @@
 
 .category-name{
     position: absolute;
-    top: 10;
-    left: 7;
-    right: 6;
+    top: 120px;
+    left: 10px;
+    /* right: 6px; */
     bottom: 0;
-    background-color: rgba(87, 81, 81, 0.356);
-    border-radius: 10px;
     color: rgb(255, 255, 255);
 }
