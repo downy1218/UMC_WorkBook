@@ -37,3 +37,23 @@ export const OverlayStyle = styled.div`
 export const MovieInfo = styled.div`
     color:white;
 `
+
+//------영화 크레딧 정보------------------------------------------------------------------
+
+export const Credit = styled.div`
+    color:white;
+    margin-left:150px;
+   
+
+`
+export const OverView = styled.div`
+    font-size: 25px
+
+`
+
+export const ActorPhoto = styled.div`
+    width: 80px;
+    height: 80px;
+    border-radius: 100%;
+    border: 0.5px solid white;
+`

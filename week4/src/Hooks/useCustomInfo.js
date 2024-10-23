@@ -1,8 +1,8 @@
 import { axiosInstance } from '../Apis/axios-instance.js';
 import { useEffect, useState } from 'react';
 
-const useCustomFetch = (url) => {
-    const [movie, setMovie] = useState([]);
+const useCustomInfo = (url) => {
+    const [credit, setCredit] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
@@ -13,8 +13,8 @@ const useCustomFetch = (url) => {
             setIsLoading(true);
           try {
             const response = await axiosInstance.get(url)
-            setMovie(response.data.results);
-            console.log(response.data.results)
+            setCredit(response.data);
+            console.log(response.data)
           } 
           catch (error) {
             setIsError(true);
@@ -27,7 +27,7 @@ const useCustomFetch = (url) => {
         
         
     }, [url]);
-    return{isError,isLoading,movie}
+    return{isError,isLoading,credit}
 };
 
-export default useCustomFetch;
+export default useCustomInfo;

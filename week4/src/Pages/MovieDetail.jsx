@@ -9,13 +9,12 @@ import { useNavigate } from 'react-router-dom';
 import { TiArrowBack } from "react-icons/ti";
 
 function MovieDetail(){
-    const { category,movie_id } = useParams();
-    // const [movie, setMovie] = useState([]);
+    const { category } = useParams();
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const navigate = useNavigate();
-    const gotoInfo = ()=>{navigate(`/movie/:${category}/:${movie_id}`)};
-
+    const gotoInfo = (movie_id)=>{navigate(`/movie/${movie_id}`)};
+    
     const {isError,isLoading,movie} = useCustomFetch(`/movie/${category}?language=ko-KR&page=1`)
 
     if(isLoading){
@@ -45,20 +44,20 @@ function MovieDetail(){
               <TiArrowBack style={{color:'white',fontSize:'32px',cursor:'pointer'}} onClick={()=>navigate('/category')}/>
             </div>
             <M.GridContainerStyle1>
-              {movie.map((movie, index) => (
-                <M.PosterContainer1 key={movie.id}>
+              {movie.map((movieItem, index) => (
+                <M.PosterContainer1 key={movieItem.id}>
                   <M.PosterStyle1
-                    title = {movie.title}
-                    date = {movie.release_date}
-                    overview={movie.overview}
-                    movieID={movie.id}
+                    title = {movieItem.title}
+                    date = {movieItem.release_date}
+                    overview={movieItem.overview}
+                    movie_id={movieItem.id}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={()=>gotoInfo()}
+                    onClick={()=>gotoInfo(movieItem.id)}
                   >
                     
                     <img
-                      src={`${baseUrl}${movie.poster_path}`}
+                      src={`${baseUrl}${movieItem.poster_path}`}
                       alt={movie.original_title}
                       style={{ width: '100px', height: '150px', objectFit : 'cover', aspectRatio: '3/4', marginBottom: '10px', borderRadius: '10px'}} // 이미지가 부모의 크기를 가득 채우도록
                     />

@@ -22,7 +22,7 @@ function App() {
 
 
             <Route path="/movie/:category" element={<MovieDetail />} />
-            <Route path="/movie/temp" element={<DetailInfo />} />
+            <Route path="/movie/:movie_id" element={<DetailInfo />} />
           </Route>
         </Routes>
       </BrowserRouter> 
