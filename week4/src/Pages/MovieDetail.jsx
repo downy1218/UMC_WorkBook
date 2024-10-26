@@ -13,9 +13,9 @@ function MovieDetail(){
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const navigate = useNavigate();
-    const gotoInfo = (movie_id)=>{navigate(`/movie/${movie_id}`)};
-    
-    const {isError,isLoading,movie} = useCustomFetch(`/movie/${category}?language=ko-KR&page=1`)
+    const gotoInfo = () => {navigate(`/movie/${movie.id}`)};
+    const {isError, isLoading, data:movie} = useCustomFetch(`/movie/${category}?language=ko-KR&page=1`)
+    console.log('movie:',movie)
 
     if(isLoading){
       return(
@@ -45,7 +45,7 @@ function MovieDetail(){
             </div>
             <M.GridContainerStyle1>
               {movie.map((movieItem, index) => (
-                <M.PosterContainer1 key={movieItem.id}>
+                <M.PosterContainer1 key={movieItem.id} movie={movie}>
                   <M.PosterStyle1
                     title = {movieItem.title}
                     date = {movieItem.release_date}
@@ -53,7 +53,7 @@ function MovieDetail(){
                     movie_id={movieItem.id}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={()=>gotoInfo(movieItem.id)}
+                    onClick={gotoInfo}
                   >
                     
                     <img
@@ -61,11 +61,11 @@ function MovieDetail(){
                       alt={movie.original_title}
                       style={{ width: '100px', height: '150px', objectFit : 'cover', aspectRatio: '3/4', marginBottom: '10px', borderRadius: '10px'}} // 이미지가 부모의 크기를 가득 채우도록
                     />
-                    <M.MovieInfo1>
-                      <div style={{fontSize:'15px'}}>{movie.title}</div>
-                      <div style={{fontSize:'10px'}}>{movie.release_date}</div>
-                    </M.MovieInfo1>
                     <M.OverlayStyle1 style={{ opacity: hoveredIndex === index ? 1 : 0 }}/>
+                    <M.MovieInfo1>
+                      <div style={{fontSize:'15px',color:'white'}}>{movieItem.title}</div>
+                      <div style={{fontSize:'10px'}}>{movieItem.release_date}</div>
+                    </M.MovieInfo1>
                   </M.PosterStyle1>
                 </M.PosterContainer1>
               ))}

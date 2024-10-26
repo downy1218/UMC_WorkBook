@@ -2,7 +2,7 @@ import { axiosInstance } from '../Apis/axios-instance.js';
 import { useEffect, useState } from 'react';
 
 const useCustomFetch = (url) => {
-    const [movie, setMovie] = useState([]);
+    const [data, setData] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);
 
@@ -13,7 +13,7 @@ const useCustomFetch = (url) => {
             setIsLoading(true);
           try {
             const response = await axiosInstance.get(url)
-            setMovie(response.data.results);
+            setData(response.data.results); //result가 아니라 results였음...
             console.log(response.data.results)
           } 
           catch (error) {
@@ -27,7 +27,7 @@ const useCustomFetch = (url) => {
         
         
     }, [url]);
-    return{isError,isLoading,movie}
+    return{isError,isLoading,data}
 };
 
 export default useCustomFetch;
