@@ -22,7 +22,7 @@ function App() {
 
 
             <Route path="/movie/:category" element={<MovieDetail />} />
-            <Route path="/movie/:movie_id" element={<DetailInfo />} />
+            <Route path="/movie/detail/:movie_id" element={<DetailInfo />} /> {/*왜 detail을 추가해야할까 */}
           </Route>
         </Routes>
       </BrowserRouter> 

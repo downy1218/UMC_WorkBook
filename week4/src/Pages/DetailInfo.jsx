@@ -26,8 +26,8 @@ function DetailInfo(){
         )
       }
 
-    console.log(movie_id)
-    console.log(credit)
+    console.log('movieID:',movie_id)
+    console.log('creditData:',credit)
     return(
         <D.Credit>
             <div>

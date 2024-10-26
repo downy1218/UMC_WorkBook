@@ -13,8 +13,8 @@ function MovieDetail(){
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
     const [hoveredIndex, setHoveredIndex] = useState(null);
     const navigate = useNavigate();
-    const gotoInfo = () => {navigate(`/movie/${movie.id}`)};
     const {isError, isLoading, data:movie} = useCustomFetch(`/movie/${category}?language=ko-KR&page=1`)
+    const gotoInfo = (movie_id) => {navigate(`/movie/detail/${movie_id}`),console.log('눌림')};
     console.log('movie:',movie)
 
     if(isLoading){
@@ -53,7 +53,8 @@ function MovieDetail(){
                     movie_id={movieItem.id}
                     onMouseEnter={() => setHoveredIndex(index)}
                     onMouseLeave={() => setHoveredIndex(null)}
-                    onClick={gotoInfo}
+                    onClick={()=>gotoInfo(movieItem.id)}
+                    
                   >
                     
                     <img
