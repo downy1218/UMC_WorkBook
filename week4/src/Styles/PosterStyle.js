@@ -43,17 +43,84 @@ export const MovieInfo = styled.div`
 export const Credit = styled.div`
     color:white;
     margin-left:150px;
-   
-
+    margin-top: 0px
 `
 export const OverView = styled.div`
-    font-size: 25px
+    p{
+        margin-top:70px;
+        font-style:italic;
+        font-size:40px;
+        width:1200px;
+
+    }
+    h3{
+        font-size: 20px;
+        color:grey;
+        width:1200px;
+        line-height:50px;
+        margin-top:70px;
+    }
 
 `
+export const Backdrop = styled.div`
+    border-radius: 40px;
+    overflow: hidden;
+    max-width:1200px;
+    height:500px;
+    position: relative;
+    img{
+        width: 100%;
+        height: 100%;
+        object-fit : cover;
+        aspect-ratio: 2/1;
+        opacity:0.5;
+    }
+`
+export const ActorPhoto = styled.div`
+    width:120px;
+    height:150px;
+    img{
+        width:100%;
+        height:100%;
+        object-fit:cover
+    }
+    p{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        color:grey
+    }
+`
+export const SmallInfo = styled.div`
+    display: flex;
+    gap: 150px;
+    position: absolute;
+    bottom:-40px;
+    left:180px;
+    left:
+    z-index:1;
+    
+    p{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        font-size:50px;
+        margin-top:12px;
+        color:rgba(150, 246, 255, 1);
+    }
+    h3{
+        display:flex;
+        justify-content:center;
+        align-items:center;
 
-// export const ActorPhoto = styled.div`
-//     width: 80px;
-//     height: 80px;
-//     border-radius: 100%;
-//     border: 0.5px solid white;
-// `
+    }
+`
+
+export const Titles = styled.div`
+    margin-top:5px;
+    p{
+        font-size:15px;
+        color:grey;
+        margin-top:0;
+    }
+`

@@ -58,7 +58,7 @@ function MovieDetail(){
                     <img
                       src={`${baseUrl}${movieItem.poster_path}`}
                       alt={movie.original_title}
-                      style={{ width: '100px', height: '150px', objectFit : 'cover', aspectRatio: '3/4', marginBottom: '10px', borderRadius: '10px'}} // 이미지가 부모의 크기를 가득 채우도록
+                      style={{ width: '100px', height: '150px', objectFit : 'cover', aspectRatio: '3/4', marginBottom: '10px', borderRadius: '10px'}} 
                     />
                     <M.OverlayStyle1 style={{ opacity: hoveredIndex === index ? 1 : 0 }}/>
                     <M.MovieInfo1>
