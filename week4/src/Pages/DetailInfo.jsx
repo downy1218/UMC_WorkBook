@@ -58,10 +58,13 @@ function DetailInfo() {
           </div>
         </D.SmallInfo>
 
-        <D.Titles>
-          <h1>{movieDetail?.title}</h1>
-          <p>{movieDetail?.original_title}</p>
-        </D.Titles>
+        <D.TitlesContainer>
+          <D.Titles>
+            <h1>{movieDetail?.title}</h1>
+            <p>{movieDetail?.original_title}</p>
+          </D.Titles>
+          <button>예매하기</button>
+        </D.TitlesContainer>
 
         <D.OverView>
           <p>{movieDetail?.tagline || null}</p>
@@ -73,35 +76,32 @@ function DetailInfo() {
         <h1>감독</h1>
         <div>
           {director && (
-            <div>
-              <D.ActorPhoto>
+              <D.DirectorInfo>
                 <img
                   src={`${baseUrl}${director?.profile_path}`}
                 />
                 <p>{director?.name}</p>
-              </D.ActorPhoto>
-            </div>
+              </D.DirectorInfo>
+          
           )}
         </div>
       </div>
 
-      
-      <div style={{ paddingTop: '150px' }}>
+
+      <div style={{marginTop:'150px'}}>
         <h1>출연</h1>
-        <div>
+        <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)'}}>
           {castData&&(
-            castData.slice(0,8).map((actor)=>{
+            castData.slice(0,10).map((actor)=>{
               return(
-                <div key={actor.cast_id} style={{display:'flex'}}>
-                  <D.ActorPhoto>
-                    <img
-                      src={`${baseUrl}${actor?.profile_path}`}
-                      alt='배우 사진 없음'
-                    />
-                    <p>캐릭터 : {actor.character}</p>
-                    <p>배우 : {actor.original_name}</p>
-                  </D.ActorPhoto>
-                </div>
+                <D.ImgContainer key={actor.cast_id}>
+                  <img
+                  src={`${baseUrl}${actor?.profile_path}`}
+                  alt='배우 사진 없음'>
+                  </img>
+                  <p>{actor.character}</p>
+                  <p style={{color:'grey'}}>{actor.original_name}</p>
+                </D.ImgContainer>
               )
             })
           )}

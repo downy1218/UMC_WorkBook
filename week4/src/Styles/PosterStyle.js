@@ -76,21 +76,29 @@ export const Backdrop = styled.div`
         opacity:0.5;
     }
 `
-export const ActorPhoto = styled.div`
+
+
+export const DirectorInfo = styled.div`
     width:120px;
     height:150px;
     img{
         width:100%;
         height:100%;
-        object-fit:cover
+        object-fit:cover;
+        // margin-bottom: 10px;
+        // margin-top:10px;
+        // padding:8px;
+        gap:5px;
     }
     p{
         display:flex;
         justify-content:center;
         align-items:center;
-        color:grey
+        color:white;
     }
 `
+
+
 export const SmallInfo = styled.div`
     display: flex;
     gap: 150px;
@@ -118,9 +126,34 @@ export const SmallInfo = styled.div`
 
 export const Titles = styled.div`
     margin-top:5px;
+
     p{
         font-size:15px;
         color:grey;
         margin-top:0;
+    }
+`
+export const TitlesContainer = styled.div`
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-right:150px;
+
+    button{
+        background-color:#7DCBD2;
+        color:white;
+        width:200px;
+        height:40px;
+        border:none;
+        border-radius:10px;
+        cursor:pointer;
+    }
+`
+//프로필사진과 이름을 하나로 묶은 덩어리
+export const ImgContainer = styled.div`
+    img{
+        width:120px;
+        height:150px;
+        object-fit:cover;
     }
 `
