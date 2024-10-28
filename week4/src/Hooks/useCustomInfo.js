@@ -15,6 +15,8 @@ const useCustomInfo = (url) => {
             const response = await axiosInstance.get(url)
             setCredit(response.data);
             console.log(response.data)
+            console.log('credit:',response.data.cast)
+            console.log('cast:',response.data.crew)
           } 
           catch (error) {
             setIsError(true);
@@ -27,7 +29,7 @@ const useCustomInfo = (url) => {
         
         
     }, [url]);
-    return{isError,isLoading,credit}
+    return{credit,isError,isLoading}
 };
 
 export default useCustomInfo;

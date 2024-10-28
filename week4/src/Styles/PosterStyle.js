@@ -51,9 +51,9 @@ export const OverView = styled.div`
 
 `
 
-export const ActorPhoto = styled.div`
-    width: 80px;
-    height: 80px;
-    border-radius: 100%;
-    border: 0.5px solid white;
-`
+// export const ActorPhoto = styled.div`
+//     width: 80px;
+//     height: 80px;
+//     border-radius: 100%;
+//     border: 0.5px solid white;
+// `

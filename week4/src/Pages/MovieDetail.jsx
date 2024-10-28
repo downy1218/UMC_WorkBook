@@ -1,9 +1,7 @@
 //MovieDetail.js 파일
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import * as M from '../Styles/CategoryStyle.js';
-import { axiosInstance } from '../Apis/axios-instance.js';
 import useCustomFetch from '../Hooks/useCustomFetch.js';
 import { useNavigate } from 'react-router-dom';
 import { TiArrowBack } from "react-icons/ti";
