@@ -1,3 +1,6 @@
+import {useForm} from 'react-hook-form';
+
+
 function RegisterPage(){
     return(
         <>
