@@ -13,6 +13,7 @@ export const NavTitle = styled.button`
     /* display: flex;
     justify-content: start;
     text-decoration-style: none; 글자 밑에 줄 나타남;;*/
+    font-weight:bold;
 `
 export const NavBtn = styled.div`
     display: flex;

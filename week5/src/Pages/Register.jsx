@@ -1,6 +1,7 @@
 import {useForm} from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import * as R from '../Styles/CategoryStyle';
 
 function RegisterPage(){
     const schema = yup.object().shape({
@@ -18,10 +19,11 @@ function RegisterPage(){
 
 
     return(
+        
         <form onSubmit={handleSubmit(onSubmit)}>
-            <input type={'email'}{...register('이메일')}/>
+            <input type={'email'}{...register('email')}/>
             <p style={{color: 'red'}}>{errors.이메일?.message}</p>
-            <input type={'password'}{...register('비밀번호')}/>
+            <input type={'password'}{...register('password')}/>
             <p style={{color: 'red'}}>{errors.비밀번호?.message}</p>
             <input type={'submit'}/>
         </form>

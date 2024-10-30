@@ -40,3 +40,45 @@ transition: opacity 0.1s ease;
 export const MovieInfo1 = styled.div`
 color:white;
 `
+//=====로그인 페이지==========================================================================
+
+export const LoginTitle = styled.div`
+    h1{
+        color:white;
+        display:flex;
+        justify-content:center;
+        font-weight:bold;
+        font-size:25px;
+
+    }
+    form{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        flex-direction:column;
+        gap:5px;
+    }
+    input,button{
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        width:500px;
+        height:50px;
+        border-radius:10px;
+        padding-left:9px;
+    }
+    button{
+        font-size:15px;
+        font-weight:bold;
+        color:white;
+        background-color:rgb(255, 71, 71);
+        cursor:pointer;
+        width:520px;
+        height:55px;
+        transition:background-color 0.8s;
+    }
+    button:hover{
+        background-color:white;
+        color:rgb(255, 71, 71);
+    }
+`
