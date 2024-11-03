@@ -4,6 +4,7 @@ import './Poster.css';
 import styled from 'styled-components';
 import * as P from '../Styles/PosterStyle.js';
 
+
 const MoviePosters = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
@@ -12,6 +13,7 @@ const MoviePosters = () => {
 
 
   return (
+    
     <div style={{
       display: 'flex',
       justifyContent: 'center',

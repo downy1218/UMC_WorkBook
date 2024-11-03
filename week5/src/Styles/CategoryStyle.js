@@ -56,7 +56,7 @@ export const LoginTitle = styled.div`
         justify-content:center;
         align-items:center;
         flex-direction:column;
-        gap:5px;
+        gap:35px;
     }
     input,button{
         display:flex;
