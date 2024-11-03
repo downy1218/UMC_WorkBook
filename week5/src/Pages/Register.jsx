@@ -18,7 +18,7 @@ function RegisterPage(){
         // e.preventDefault();
         console.log('data:',data)
     };
-    console.log('email value:', watch('email')); //값 실시간 확인
+    console.log('email value:', watch('email')); //값 실시간 확인 
     return(
         <R.LoginTitle>
             <h1>회원가입</h1>
