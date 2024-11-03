@@ -14,6 +14,11 @@ function LoginPage(){
 
     console.log(login.getTextInputProps('email'));
 
+    const handlePressLogin = ()=>{
+        event.preventDefault(); 
+        console.log(login.values.email,login.values.password)
+    };
+
     return(
         <L.LoginTitle>
             <h1>로그인</h1>
@@ -23,7 +28,7 @@ function LoginPage(){
 
                 <input type='password'{...login.getTextInputProps('password')} placeholder='비밀번호를 입혁하세요'/>
                 {login.touched?.password&& login.errors?.password && <p style={{color:'red'}}>{login.errors.password}</p>}
-                <button type='submit'>로그인</button>
+                <button onClick={handlePressLogin}>로그인</button>
             </form>
         </L.LoginTitle>
         
