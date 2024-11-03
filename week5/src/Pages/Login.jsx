@@ -14,7 +14,7 @@ function LoginPage(){
 
     console.log(login.getTextInputProps('email'));
 
-    const handlePressLogin = ()=>{
+    const handlePressLogin = (event)=>{
         event.preventDefault(); 
         console.log(login.values.email,login.values.password)
     };

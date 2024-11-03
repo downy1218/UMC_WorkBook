@@ -56,7 +56,7 @@ export const LoginTitle = styled.div`
         justify-content:center;
         align-items:center;
         flex-direction:column;
-        gap:35px;
+        gap:15px;
     }
     input,button{
         display:flex;
@@ -66,6 +66,7 @@ export const LoginTitle = styled.div`
         height:50px;
         border-radius:10px;
         padding-left:9px;
+      
     }
     button{
         font-size:15px;
