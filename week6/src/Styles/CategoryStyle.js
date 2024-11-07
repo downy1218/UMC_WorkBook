@@ -83,3 +83,27 @@ export const LoginTitle = styled.div`
         color:rgb(255, 71, 71);
     }
 `
+
+export const SignUpBtn = styled.button`
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        width:500px;
+        height:50px;
+        border-radius:10px;
+        padding-left:9px;
+        font-size:15px;
+        font-weight:bold;
+        color:white;
+        background-color:rgb(255, 71, 71);
+        cursor:pointer;
+        width:520px;
+        height:55px;
+        transition:background-color 0.8s;
+`
+
+export const InputWrapper=styled.div`
+    display:flex;
+    justify-content:center;
+    align-items:center;
+`

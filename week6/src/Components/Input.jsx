@@ -1,14 +1,25 @@
-function Input() {
+import styled from "styled-components";
+
+function Input({ type, register, placeholder }) {
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input type={'email'}{...register('email')} placeholder='이메일을 입력하세요' />
-                <p style={{ color: 'red' }}>{errors.email?.message}</p>
-                <input type={'password'}{...register('password')} placeholder='비밀번호를 입혁하세요' />
-                <p style={{ color: 'red' }}>{errors.password?.message}</p>
-                <button type='submit'></button>
-            </form>
+            <InputStyle {...register(type)} type={type} placeholder={placeholder} />
         </div>
     )
 };
+
+
+
+
+
+const InputStyle = styled.input`
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        width:500px;
+        height:50px;
+        border-radius:10px;
+        padding-left:9px;
+`
+
 export default Input;
