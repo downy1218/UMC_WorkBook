@@ -1,46 +1,24 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Input from './Components/Input.jsx';
 import Button from './Components/Button.jsx';
+import { TodoContext } from './Context/todoContext.jsx';
 
 function App() {
 
-  const [todo, setTodo] = useState([
-    { id: 1, task: 'reading' },
-    { id: 2, task: 'eating' },
-    { id: 3, task: 'game' }
-  ]);
-  const [text, setText] = useState(''); //사용자가 입력하는 값
-  const [editing, setEditing] = useState(''); 
-  const [editText, setEditText] = useState('');  //수정 칸에 수정되는 텍스트
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
-
-  const addTask = () => {
-    const newId = todo.length > 0 ? Math.max(...todo.map(item => item.id)) + 1 : 1
-    if (text.trim() !== '') {
-      setTodo((prev) => [...prev, { id: newId, task: text }])
-    };
-    // setTodo((prev)=>[...prev, {id:prev.id+1, task:text}]) //할 일 번호가 순서대로 출력되게함 
-    setText('');
-  };
-
-
-
-  const delTask = (id) => {
-    setTodo((prev) => prev.filter((item) => item.id !== id))
-  };
-
-  //수정하는 함수
-  const updateTask = (id) => {
-    setTodo((prev) =>
-      prev.map((item) => (item.id === id ? { ...item, task: editText } : item))
-    )
-    setEditing('')
-  };
+  const { todo,
+    setTodo,
+    text,
+    setText,
+    editing,
+    setEditing,
+    editText,
+    setEditText,
+    handleSubmit,
+    addTask,
+    delTask,
+    updateTask
+  } = useContext(TodoContext);
 
   return (
     <>
