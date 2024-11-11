@@ -3,7 +3,7 @@ import styled from "styled-components";
 function Input({ type, register, placeholder }) {
     return (
         <div>
-            <InputStyle {...register(type)} type={type} placeholder={placeholder} />
+            <InputStyle {...register} type={type} placeholder={placeholder} />
         </div>
     )
 };
