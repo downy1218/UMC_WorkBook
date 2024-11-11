@@ -26,9 +26,10 @@ export const NavBtn = styled.div`
     margin-right: 25px;
     /* margin-top: 0; */
     border-radius: 7px;    
+    text-decoration-style: none;
 `
 
-
+//로그인버튼
 export const NavBtn1 = styled.button`
     background: none;
     color: #FFFF;
@@ -36,7 +37,7 @@ export const NavBtn1 = styled.button`
     cursor: pointer;
 `
 
-
+//회원가입버튼
 export const NavBtn2 = styled.button`
     background-color: rgb(255, 71, 71);
     color: white;

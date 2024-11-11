@@ -34,15 +34,18 @@ function LoginPage(){
                 localStorage.setItem('accessToken',response.data.accessToken);
                 localStorage.setItem('refreshToken',response.data.refreshToken);
                 console.log('토큰 저장 성공')
+                console.log(response.data.accessToken)
 
             }else{
                 console.log('토큰저장실패')
             }
+            console.log('로그인 성공')
             navigate('/');
         }
         catch(error){
             console.log('로그인 실패');
             alert('이메일 또는 비밀번호가 잘못되었습니다')
+            
         }
     };
     

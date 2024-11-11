@@ -30,7 +30,7 @@ function RegisterPage() {
 
         }
         catch(error){
-            console.log('회원가입 에러')
+            console.log(error)
         }
         // e.preventDefault();
         console.log('data:', data)

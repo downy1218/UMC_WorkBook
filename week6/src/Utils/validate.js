@@ -11,7 +11,7 @@ function validateUser(values){
         errors.email = '올바른 형식을 입력하세요'
     }
     if(values.password.length < 8 || values.password.length > 16){
-        errors.password = '다시 입력하세요'
+        errors.password = '비밀번호가 일치하지 않습니다'
     }
     return errors;
 };
