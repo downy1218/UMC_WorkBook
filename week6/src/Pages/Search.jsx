@@ -1,8 +1,15 @@
-function SearchPage(){
-    return(
-        
-        <p style={{color:'white', fontSize:'40px', marginLeft:'150px'}}>검색 페이지 입니다</p>
-        
+import * as S from '../Styles/SearchStyle';
+
+function SearchPage() {
+    return (
+        <>
+            <S.Container>
+                <S.SearchInput placeholder='검색어를 입력하세요..' />
+                <span><S.SearchBtn>검색</S.SearchBtn></span>
+            </S.Container>
+        </>
+
+
     )
 }
 export default SearchPage;
