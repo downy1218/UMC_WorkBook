@@ -1,0 +1,35 @@
+.category-item{
+    position: relative;
+}
+.cate-container{
+    width: 500px;
+    height: 100%;;
+    display: flex;
+    /* justify-content: start; */
+    margin-left: 200px;
+    margin-top: 0%;
+}
+.album{
+    display: flex; /*이미지 가로로 배치*/
+    gap: 15px;
+    margin-left: 200px;
+    position: relative;  /*상위 요소에 지정해줘야됨*/
+}
+.album img{
+    object-fit: cover;
+    height: 170px;
+    width: 290px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+
+.category-name{
+    position: absolute;
+    top: 120px;
+    left: 10px;
+    /* right: 6px; */
+    bottom: 0;
+    color: rgb(255, 255, 255);
+}
