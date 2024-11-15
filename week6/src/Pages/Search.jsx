@@ -3,6 +3,7 @@ import * as S from '../Styles/SearchStyle';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import useCustomFetch from '../Hooks/useCustomFetch';
 import MovieDetail from './MovieDetail';
+import Card from '../Components/Card';
 
 function SearchPage() {
     const[query,setQuery] = useState(''); //사용자가 입력하는 값
@@ -27,7 +28,6 @@ function SearchPage() {
         if(mq===query)return; //같을 경우 함수를 종료
         navigate(`/search?mq=${query}`);
         console.log('클릭됨');
-        
     };
     const handleKeyDown = (e)=>{
         if(e.key === 'Enter'){
@@ -38,9 +38,12 @@ function SearchPage() {
     console.log('입력하는 값:',query);
 
     const {isError, isLoading, data:movies} = useCustomFetch(url);
-    console.log(movies);
+    console.log('검색한 영화 정보값:',movies);
 
-
+    useEffect(() => {
+        // 검색 결과를 found 상태에 업데이트
+        setFound(movies);
+      }, [movies]);
 
 
 
@@ -55,11 +58,12 @@ function SearchPage() {
                 onKeyDown={handleKeyDown}/>
                 <span><S.SearchBtn onClick={()=>handleSearch()}>검색</S.SearchBtn></span>
             </S.Container>
-
+ 
             <S.GridContainer>
-                {movies.map((movies)=>{
-                    <MovieDetail key={movies.id} movies={movies}></MovieDetail>
-                })}
+                {found.map((movie)=>{
+                    <Card key={movie.id} movie={movie}/>
+                    })
+                }
             </S.GridContainer>
         </>
 

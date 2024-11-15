@@ -27,18 +27,22 @@ align-items: center;
 
 
 export const OverlayStyle1 = styled.div`
-position:absolute; //상대 위치를 기준으로 div요소가 0 0 0 0만큼 위치
+position:absolute; 
 top: 0;
 left: 0;
 right: 0;
 bottom: 0;
 background-color: rgba(0, 0, 0, 0.7);
-opacity: 0; // display:'none->block'이랑 같은거
+opacity: 0; 
 transition: opacity 0.1s ease;
 `;
 
 export const MovieInfo1 = styled.div`
 color:white;
+font-size:15px;
+p{
+    font-size:13px;
+}
 `
 //=====로그인 페이지==========================================================================
 
