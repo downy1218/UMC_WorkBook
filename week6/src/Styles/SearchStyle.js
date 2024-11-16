@@ -28,6 +28,9 @@ export const SearchBtn = styled.button`
 `
 
 export const GridContainer =styled.div`
+    margin-left:100px;
+    gap:10px;
     margin-top:30px;
     display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(140px, 1fr));
 `

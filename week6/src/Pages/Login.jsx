@@ -41,6 +41,7 @@ function LoginPage(){
             }
             console.log('로그인 성공')
             navigate('/');
+            window.location.reload(); //로그인 후 페이지 새로고침 안해도 reload해줌
         }
         catch(error){
             console.log('로그인 실패');
