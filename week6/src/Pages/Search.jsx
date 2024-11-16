@@ -7,6 +7,8 @@ import { SearchMovieList } from '../Components/SearchMovie';
 import styled from 'styled-components';
 import Skeleton from '../Components/Skeleton';
 import SkeletonList from '../Components/SkeletonList';
+import useDebounce from '../Hooks/Debounce';
+
 
 const NoMovie = styled.div`
     display:flex;
@@ -18,9 +20,9 @@ const NoMovie = styled.div`
 function SearchPage() {
     const [query, setQuery] = useState(''); //사용자가 입력하는 값
     const [found, setFound] = useState([]); //검색해서 나온 값들
-    const [searching, setSearching] = useState(false); //검색중인지아닌지
+    const [searchTerm, setSearchTerm] = useState(false); 
     const navigate = useNavigate();
-    const url = `/search/movie?query=${query}&include_adult=false&language=ko-KR&page=1`;
+    const url = `/search/movie?query=${searchTerm}&include_adult=false&language=ko-KR&page=1`;
     const [searchParams, setSearchParams] = useSearchParams({
         mq: ''
     });
@@ -43,15 +45,18 @@ function SearchPage() {
         }
     };
 
-    console.log('입력하는 값:', query);
-
     const { isError, isLoading, data: movies } = useCustomFetch(url);
-
     console.log('검색한 영화 정보들:', movies);
 
 
-
-
+    const debounce = useDebounce(query,5000);
+    
+    useEffect(()=>{
+        if(debounce){
+            setSearchTerm(debounce);
+            navigate(`/search?mq=${debounce}`)
+        }
+    },[debounce])
 
 
     return (
