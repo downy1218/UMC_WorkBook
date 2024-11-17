@@ -3,17 +3,32 @@ import * as D from '../Styles/PosterStyle.js';
 import React from 'react';
 import useCustomInfo from '../Hooks/useCustomInfo.js';
 import { IoTicket } from "react-icons/io5";
+import { useQuery } from '@tanstack/react-query';
+import { MovieApi } from '../Apis/MovieApis.js';
 
 
 function DetailInfo() {
   const baseUrl = 'https://image.tmdb.org/t/p/original'; //이미지크기 돌려줘야함(화질저하방지)
   const { movie_id, category } = useParams();
 
-  const { credit: movieCredit, isError: creditError, isLoading: creditLoading } = useCustomInfo(`/movie/${movie_id}/credits?language=ko-KR&page=1`)// credits 데이터를 위한 훅
-  const { credit: movieDetail, isError: datailError, isLoading: detailLoading } = useCustomInfo(`/movie/${movie_id}?language=ko-KR&page=1`)   // 영화 상세 정보를 위한 훅
+
+  
+  const { data: movieCredit, isError: creditError, isLoading: creditLoading } = useQuery({
+    queryKey:['credit',movie_id],
+    queryFn:()=>MovieApi.getCredit(movie_id)
+  });
+  
+  const { data: movieDetail, isError: datailError, isLoading: detailLoading } = useQuery({
+    queryKey:['movieDetail',movie_id],
+    queryFn:()=>MovieApi.getDetail(movie_id)
+  });
+  
+  console.log('movieCredit:',movieCredit);
+  console.log('movieDetail:',movieDetail);
   const castData = movieCredit?.cast;
   const crewData = movieCredit?.crew;
   const director = movieCredit?.crew?.find(crew => crew.job === 'Director'); //감독정보 따로 확인
+
 
   if (creditLoading || detailLoading) {
     return (

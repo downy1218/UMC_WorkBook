@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import Card from '../Components/Card.jsx';
 import styled from 'styled-components';
 import * as M from '../Styles/CategoryStyle.js';
+import { useQuery } from '@tanstack/react-query';
+import { MovieApi } from '../Apis/MovieApis.js';
+import * as S from '../Styles/SearchStyle';
+import SkeletonList from '../Components/SkeletonList';
 
 
 const CardWrapper = styled.div`
@@ -17,14 +21,23 @@ const CardWrapper = styled.div`
 function MovieDetail() {
   const { category } = useParams();
   const navigate = useNavigate();
-  const { isError, isLoading, data: movie } = useCustomFetch(`/movie/${category}?language=ko-KR&page=1`)
-  console.log('movie:', movie)
+  // const { isError, isLoading, data: movie } = useCustomFetch(`/movie/${category}?language=ko-KR&page=1`);
+  
+  
+  const {isError, isLoading, data:movie} = useQuery({
+    queryKey:['movies',category], //카테고리가 변경될때마다 새로운 데이터
+    queryFn:()=>MovieApi.getCategory(category)
+  });
+  console.log('movie:', movie);
+
+
+
 
   if (isLoading) {
     return (
-      <div style={{ color: 'white', fontSize: '20px', marginLeft: '150px' }}>
-        <h1>loading...</h1>
-      </div>
+      <S.GridContainer>
+        <SkeletonList/>
+      </S.GridContainer>
     )
   }
   if (isError) {
