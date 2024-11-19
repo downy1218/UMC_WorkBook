@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const GridContainerStyle1 = styled.div`
 display: grid;
 margin-top:0px;
-grid-template-columns: repeat(10, 1fr); 
+grid-template-columns: repeat(5, 1fr); 
 gap: 30px; // 포스터 위 아래 줄 사이 간격
 padding:8px;
 `;
