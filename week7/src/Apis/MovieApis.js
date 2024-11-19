@@ -1,13 +1,14 @@
 import { axiosInstance } from "./axios-instance";
 
 export const MovieApi = {
-    getCategory: (category,pageParam)=> 
-        axiosInstance.get(`/movie/${category}?language=ko-KR&page=${pageParam}`)
-    .then(response=>({
-        results: response.data.results,
-        nextPage: pageParam + 1,
-        total_pages:response.data.total_pages
-        })
+    getCategory: (category,page)=> 
+        axiosInstance.get(`/movie/${category}?language=ko-KR&page=${page}`)
+    .then(response=>{
+        return{
+            results: response.data.results,
+            total_pages:response.data.total_pages
+            // nextPage: pageParam + 1,
+        }}
     ),
 
     getCredit:(movie_id)=>

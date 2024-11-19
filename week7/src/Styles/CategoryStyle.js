@@ -4,7 +4,7 @@ import styled from "styled-components";
 export const GridContainerStyle1 = styled.div`
 display: grid;
 margin-top:0px;
-grid-template-columns: repeat(5, 1fr); 
+grid-template-columns: repeat(10, 1fr); 
 gap: 30px; // 포스터 위 아래 줄 사이 간격
 padding:8px;
 `;
@@ -42,6 +42,7 @@ color:white;
 font-size:15px;
 p{
     font-size:13px;
+    color:grey;
 }
 `
 //=====로그인 페이지==========================================================================
@@ -110,4 +111,29 @@ export const InputWrapper=styled.div`
     display:flex;
     justify-content:center;
     align-items:center;
+`
+
+export const PageBtn = styled.div`
+    width:100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap: 15px;
+    button{
+        background-color:#fff;
+        width:50px;
+        height:30px;
+        color:red;
+        border:none;
+        border-radius:10px;
+        cursor:pointer;
+        &:active{
+            background-color:rgb(255, 71, 71);
+            color:white;
+        }
+    }
+    p{
+        color:white;
+        font-weight:bold;
+    }
 `
