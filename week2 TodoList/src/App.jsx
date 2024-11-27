@@ -6,7 +6,9 @@ import { TodoContext } from './Context/todoContext.jsx';
 
 function App() {
 
-  const { 
+  const {
+    editBody,
+    setEditBody, 
     secText,
     setSecText,
     todo,
@@ -26,25 +28,27 @@ function App() {
   return (
     <>
       <h1 className='title'>UMC TO-DO-List 🎄</h1>
-      <form onSubmit={handleSubmit} className='taskForm'>
+      <form onSubmit={handleSubmit} className='formWrapper'>
         <Input
           type="text"
           value={text}
           onChange={(e) => setText(e.target.value)}
+          placeholder="제목을 입력하세요"
         />
         <Input
           type="text"
           value={secText}
           onChange={(e) => setSecText(e.target.value)}
+          placeholder="내용을 입력하세요"
         />
         <Button type='submit' onClick={() => addTask()} label='할 일 등록' />
       </form>
 
-      <div>
+      <div className="taskMenu">
         {todo.map((a, index) => {
           console.log(a)
           return (
-            <div key={a.id} className="taskMenu" style={{ display: 'flex', gap: '20px' }} >
+            <div key={a.id} >
               {editing !== a.id && (
                 <div>
                   <p>{index + 1}.</p>
@@ -59,6 +63,10 @@ function App() {
                     type="text"
                     defaultValue={a.task}
                     onChange={(e) => setEditText(e.target.value)} />
+                  <input
+                    type="text"
+                    defaultValue={a.secText}
+                    onChange={(e) => setEditBody(e.target.value)} />
                 </div>
               )}
 
@@ -75,4 +83,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

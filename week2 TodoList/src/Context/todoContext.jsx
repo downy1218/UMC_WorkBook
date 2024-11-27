@@ -12,8 +12,8 @@ export function TodoContextProvider({children}) {
     const [text, setText] = useState(''); //사용자가 입력하는 값(제목)
     const [secText, setSecText] = useState(''); //사용자가 입력하는 값(내용)
     const [editing, setEditing] = useState('');
-    const [editText, setEditText] = useState('');  //수정 칸에 수정되는 텍스트
-
+    const [editText, setEditText] = useState('');  //수정 칸에 수정되는 제목
+    const [editBody,setEditBody] = useState('')//수정되는 내용
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,7 +37,7 @@ export function TodoContextProvider({children}) {
     //3.수정하는 함수
     const updateTask = (id) => {
         setTodo((prev) =>
-            prev.map((item) => (item.id === id ? { ...item, task: editText } : item))
+            prev.map((item) => (item.id === id ? { ...item, task: editText,taskBody:editBody } : item))
         )
         setEditing('')
     };
@@ -53,7 +53,9 @@ export function TodoContextProvider({children}) {
 
     return <TodoContext.Provider
             value={{
-                secText, setSecText, todo, setTodo, text, setText, editing, setEditing, editText, setEditText, handleSubmit, addTask,delTask,updateTask}}>
+                editBody,setEditBody,secText, setSecText, 
+                todo, setTodo, text, setText, editing, setEditing, 
+                editText, setEditText, handleSubmit, addTask,delTask,updateTask}}>
     {children}
     </TodoContext.Provider>
 }
