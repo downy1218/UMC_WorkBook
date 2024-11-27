@@ -37,9 +37,13 @@ export function TodoContextProvider({children}) {
     //3.수정하는 함수
     const updateTask = (id) => {
         setTodo((prev) =>
-            prev.map((item) => (item.id === id ? { ...item, task: editText,taskBody:editBody } : item))
+            prev.map((item) => (item.id === id ? { ...item, task: editText, taskBody:editBody } : item))
         )
-        setEditing('')
+        setEditing('');
+        //수정칸에 아무것도 없을 시
+        if(editText ==='' && editBody===''){
+            alert('할 일을 입력하세요')
+        }
     };
 
 

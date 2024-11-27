@@ -57,13 +57,15 @@ function App() {
                 </div>
               )}
               {editing === a.id && (
-                <div>
+                <div className='editingInputWrapper'>
                   <p>{index + 1}.</p>
                   <input
+                    className='editingInput'
                     type="text"
                     defaultValue={a.task}
                     onChange={(e) => setEditText(e.target.value)} />
                   <input
+                  className='editingInput'
                     type="text"
                     defaultValue={a.secText}
                     onChange={(e) => setEditBody(e.target.value)} />

@@ -31,6 +31,7 @@
     border-radius: 10px;
     background-color: white;
     cursor: pointer;
+    margin-top: 10px;
 }
 .Btn:hover{
     background-color: rgb(156, 212, 255);
@@ -42,4 +43,16 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+}
+
+.editingInputWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:5px;
+}
+.editingInput{
+    padding-left: 10px;
+    border-radius: 10px;
+    border: 2px dotted rgb(190, 223, 255);
 }
