@@ -1,0 +1,27 @@
+.title{
+    display: flex;
+    justify-content: center;
+}
+
+
+.inputBox{
+    width: 200px;
+    height: 30px;
+    margin-right: 10px;
+    padding-left: 10px;
+    border-radius: 10px;
+
+}
+.Btn{
+    width: 150px;
+    height: 30px;
+    border: 1px solid red;
+    background-color: white;
+    cursor: pointer;
+}
+
+.taskForm{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
