@@ -1,4 +1,5 @@
-import { createContext,useState } from "react";
+import { createContext,useEffect,useState } from "react";
+import { todoApi } from "../Api/todoApis";
 
 export const TodoContext = createContext();
 
@@ -18,28 +19,79 @@ export function TodoContextProvider({children}) {
     const handleSubmit = (e) => {
         e.preventDefault();
     };
-    //추가하는 함수 
-    const addTask = () => {
-        const newId = todo.length > 0 ? Math.max(...todo.map(item => item.id)) + 1 : 1
-        if (text.trim() !== '') {
-            setTodo((prev) => [...prev, { id: newId, task: text , taskBody:secText}])
+
+
+
+
+    //초기 모든 투두리스트 데이터 불러오기
+    useEffect(()=>{
+        const fetchAllTodo = async()=>{
+            try{
+                const data = await todoApi.getAllTodos();
+                setTodo(data) //모든데이터집어넣기
+            }
+            catch(error){
+                console.log('모든데이터조회실패:',error)
+            }
         };
-        // setTodo((prev)=>[...prev, {id:prev.id+1, task:text}]) //할 일 번호가 순서대로 출력되게함 
-        setText('');
-    };
+        fetchAllTodo();
+    },[])
+
+
+
+
+    //todo 추가하는 함수 
+
+    const addTask = async() => {
+        try{
+            const myTodo = {
+                task:text,
+                taskBody:secText
+            };
+            if(text.trim() !== ''){
+                const data = await todoApi.createTodo(myTodo);
+                const newId = todo.length > 0 ? Math.max(...todo.map(item => item.id)) + 1 : 1;
+                setTodo((prev) => [...prev, data]);
+                setText('');
+                setSecText('');
+            }
+        }
+        catch(error){
+            console.log('추가 실패:',error)
+        }     
+    };      
+
 
 
     //삭제하는 함수
-    const delTask = (id) => {
-        setTodo((prev) => prev.filter((item) => item.id !== id))
+    const delTask = async(id) => {
+        try{
+            await todoApi.deleteTodo(id) 
+            setTodo((prev) => prev.filter((item) => item.id !== id))
+        }
+        catch(error){
+            console.log('삭제실패:',error)
+        }
     };
 
-    //3.수정(완료)하는 함수
-    const updateTask = (id) => {
-        setTodo((prev) =>
-            prev.map((item) => (item.id === id ? { ...item, task: editText, taskBody:editBody } : item))
-        )
-        setEditing('');
+
+
+
+    //수정완료 하는 함수
+    const updateTask = async(id) => {
+        try{
+            const updated = {
+                task:editText,
+                taskBody:editBody
+            };
+            setTodo((prev) =>
+                prev.map((item) => (item.id === id ? {task:editText,taskBody:editBody}: item))
+            );
+            setEditing('');
+        }
+        catch(error){
+            console.log('수정실패:',error)
+        }
     }
 
 

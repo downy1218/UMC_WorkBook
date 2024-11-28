@@ -1,13 +1,17 @@
 import { useParams } from "react-router-dom";
 import './App.css';
 import { useNavigate } from "react-router-dom";
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { TodoContext } from './Context/todoContext.jsx';
 import Input from "./Components/Input.jsx";
+import { todoApi } from "./Api/todoApis.jsx";
+import {SyncLoader} from 'react-spinners';
+
 
 function DetailPage() {
+    const [todoDetail,setTodoDetail] = useState(null); //null로 설정:데이터를 아직 불러오지않은 상태
     const navigate = useNavigate();
-    const { todoId } = useParams();
+    const { todoId } = useParams();//url에서 가져온것
     console.log("todoId:", todoId)
 
     const { todo,
@@ -18,7 +22,7 @@ function DetailPage() {
     } = useContext(TodoContext);
 
     const currentTodo = todo.find(item => item.id === parseInt(todoId)); //params로 불러온 아이디와 같은 투두 찾기
-    console.log(currentTodo.id)
+    // console.log(currentTodo.id)
 
     const handleDelete = () => {
         delTask(currentTodo.id)
@@ -32,7 +36,34 @@ function DetailPage() {
         }else{
             alert("수정이 완료됐습니다!")
         }
+    };
+
+    //개별 투두리스트 조회
+    useEffect(()=>{
+        const fetchEachTodo = async()=>{
+            try{
+                //각 todoId 별로 가져오기
+                const data = await todoApi.getTodoById(todoId);
+                console.log('data:',data)
+                //가져온 상태로 상태 업데이트
+                setTodoDetail(data);
+            }
+            catch(error){
+                console.log(`${todoId}데이터조회실패:`,error)
+            }
+        };
+        fetchEachTodo();
+    },[todoId])
+
+
+
+    if(!todoDetail){
+        <>
+            <SyncLoader color="blue"/>
+            <p>로딩 중..</p>
+        </>
     }
+
     return (
         <>
             {editing !== currentTodo.id && (
