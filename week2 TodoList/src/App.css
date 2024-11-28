@@ -56,3 +56,17 @@
     border-radius: 10px;
     border: 2px dotted rgb(190, 223, 255);
 }
+
+.detail-container{
+    display: flex;
+    justify-content: center;
+    color: black;
+}
+
+.taskTitleWrapper{
+    display: flex;
+    
+}
+.taskBodyWrapper{
+    display: flex;
+}

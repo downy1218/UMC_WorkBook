@@ -5,13 +5,13 @@ export const TodoContext = createContext();
 export function TodoContextProvider({children}) {
 
     const [todo, setTodo] = useState([
-        { id: 1, task: 'reading',taskBody:'책읽기' },
+        { id: 1, task: 'reading',taskBody:'어린왕자 책읽기' },
         { id: 2, task: 'eating',taskBody:'피자' },
         { id: 3, task: 'game',taskBody:'놀동숲' }
     ]);
     const [text, setText] = useState(''); //사용자가 입력하는 값(제목)
     const [secText, setSecText] = useState(''); //사용자가 입력하는 값(내용)
-    const [editing, setEditing] = useState('');
+    const [editing, setEditing] = useState(''); //수정 중인 id
     const [editText, setEditText] = useState('');  //수정 칸에 수정되는 제목
     const [editBody,setEditBody] = useState('')//수정되는 내용
 
@@ -34,17 +34,13 @@ export function TodoContextProvider({children}) {
         setTodo((prev) => prev.filter((item) => item.id !== id))
     };
 
-    //3.수정하는 함수
+    //3.수정(완료)하는 함수
     const updateTask = (id) => {
         setTodo((prev) =>
             prev.map((item) => (item.id === id ? { ...item, task: editText, taskBody:editBody } : item))
         )
         setEditing('');
-        //수정칸에 아무것도 없을 시
-        if(editText ==='' && editBody===''){
-            alert('할 일을 입력하세요')
-        }
-    };
+    }
 
 
 

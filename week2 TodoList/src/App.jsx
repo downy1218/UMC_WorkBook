@@ -3,8 +3,14 @@ import React, { useContext, useState } from 'react';
 import Input from './Components/Input.jsx';
 import Button from './Components/Button.jsx';
 import { TodoContext } from './Context/todoContext.jsx';
+import { useNavigate } from 'react-router-dom';
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+
+
 
 function App() {
+  const navigate = useNavigate();
+  const gotoDetail = (todoId)=> {navigate(`/todoDetail/${todoId}`)};
 
   const {
     editBody,
@@ -24,6 +30,8 @@ function App() {
     delTask,
     updateTask
   } = useContext(TodoContext);
+
+
 
   return (
     <>
@@ -46,11 +54,10 @@ function App() {
 
       <div className="taskMenu">
         {todo.map((a, index) => {
-          console.log(a)
           return (
             <div key={a.id} >
               {editing !== a.id && (
-                <div>
+                <div onClick={()=>gotoDetail(a.id)}>
                   <p>{index + 1}.</p>
                   <p>{a.task}</p>
                   <p>{a.taskBody}</p>
