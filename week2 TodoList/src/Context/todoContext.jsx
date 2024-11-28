@@ -5,11 +5,12 @@ export const TodoContext = createContext();
 
 export function TodoContextProvider({children}) {
 
-    const [todo, setTodo] = useState([
-        { id: 1, task: 'reading',taskBody:'어린왕자 책읽기' },
-        { id: 2, task: 'eating',taskBody:'피자' },
-        { id: 3, task: 'game',taskBody:'놀동숲' }
-    ]);
+    // const [todo, setTodo] = useState([
+    //     { id: 1, task: 'reading',taskBody:'어린왕자 책읽기' },
+    //     { id: 2, task: 'eating',taskBody:'피자' },
+    //     { id: 3, task: 'game',taskBody:'놀동숲' }
+    // ]);
+    const [todo,setTodo] = useState([]);
     const [text, setText] = useState(''); //사용자가 입력하는 값(제목)
     const [secText, setSecText] = useState(''); //사용자가 입력하는 값(내용)
     const [editing, setEditing] = useState(''); //수정 중인 id
@@ -28,7 +29,10 @@ export function TodoContextProvider({children}) {
         const fetchAllTodo = async()=>{
             try{
                 const data = await todoApi.getAllTodos();
-                setTodo(data) //모든데이터집어넣기
+                if(data){
+                    console.log('받아온데이터:',data)
+                    setTodo(data) //모든데이터집어넣기
+                }
             }
             catch(error){
                 console.log('모든데이터조회실패:',error)
@@ -45,13 +49,13 @@ export function TodoContextProvider({children}) {
     const addTask = async() => {
         try{
             const myTodo = {
-                task:text,
-                taskBody:secText
+                title:text,
+                content:secText
             };
             if(text.trim() !== ''){
                 const data = await todoApi.createTodo(myTodo);
                 const newId = todo.length > 0 ? Math.max(...todo.map(item => item.id)) + 1 : 1;
-                setTodo((prev) => [...prev, data]);
+                setTodo((prev) => [...prev, {id:newId,data}]);
                 setText('');
                 setSecText('');
             }
@@ -81,8 +85,8 @@ export function TodoContextProvider({children}) {
     const updateTask = async(id) => {
         try{
             const updated = {
-                task:editText,
-                taskBody:editBody
+                title:editText,
+                content:editBody
             };
             setTodo((prev) =>
                 prev.map((item) => (item.id === id ? {task:editText,taskBody:editBody}: item))

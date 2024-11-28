@@ -10,7 +10,7 @@ import {createBrowserRouter, RouterProvider} from "react-router-dom";
 
 function App() {
   const navigate = useNavigate();
-  const gotoDetail = (todoId)=> {navigate(`/todoDetail/${todoId}`)};
+  const gotoDetail = (todoId)=> {console.log("Moving to detail with id:", todoId); navigate(`/todoDetail/${todoId}`)};
 
   const {
     editBody,
@@ -59,8 +59,8 @@ function App() {
               {editing !== a.id && (
                 <div onClick={()=>gotoDetail(a.id)}>
                   <p>{index + 1}.</p>
-                  <p>{a.task}</p>
-                  <p>{a.taskBody}</p>
+                  <p>{a.title}</p>
+                  <p>{a.content}</p>
                 </div>
               )}
               {editing === a.id && (
@@ -69,12 +69,12 @@ function App() {
                   <input
                     className='editingInput'
                     type="text"
-                    defaultValue={a.task}
+                    defaultValue={a.title}
                     onChange={(e) => setEditText(e.target.value)} />
                   <input
                   className='editingInput'
                     type="text"
-                    defaultValue={a.secText}
+                    defaultValue={a.content}
                     onChange={(e) => setEditBody(e.target.value)} />
                 </div>
               )}

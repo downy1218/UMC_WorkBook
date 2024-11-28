@@ -12,7 +12,7 @@ function DetailPage() {
     const [todoDetail,setTodoDetail] = useState(null); //null로 설정:데이터를 아직 불러오지않은 상태
     const navigate = useNavigate();
     const { todoId } = useParams();//url에서 가져온것
-    console.log("todoId:", todoId)
+    console.log("todoId:", todoId) //왜 undefined?, 문자열로출력
 
     const { todo,
         editing, setEditing,
@@ -21,14 +21,13 @@ function DetailPage() {
         delTask, updateTask
     } = useContext(TodoContext);
 
-    const currentTodo = todo.find(item => item.id === parseInt(todoId)); //params로 불러온 아이디와 같은 투두 찾기
-    // console.log(currentTodo.id)
-
+    const currentTodo = todo?.find(item => item.id === parseInt(todoId)); //params로 불러온 아이디와 같은 투두 찾기(숫자)
+    console.log(currentTodo.id) //숫자로 나옴
     const handleDelete = () => {
         delTask(currentTodo.id)
         navigate('/')
     }
-
+    
     const handleUpdate = ()=>{
         updateTask(currentTodo.id)
         if(editText===''&&editBody===''){
@@ -37,16 +36,23 @@ function DetailPage() {
             alert("수정이 완료됐습니다!")
         }
     };
-
+    
     //개별 투두리스트 조회
     useEffect(()=>{
+        if(!todoId || !todo){
+            console.log('no todoId')
+            return;
+            console.log('todo:',todo)
+        }
         const fetchEachTodo = async()=>{
             try{
+                if(todoId && todo){
                 //각 todoId 별로 가져오기
                 const data = await todoApi.getTodoById(todoId);
-                console.log('data:',data)
+                console.log('가져온data:',data)
                 //가져온 상태로 상태 업데이트
                 setTodoDetail(data);
+                }
             }
             catch(error){
                 console.log(`${todoId}데이터조회실패:`,error)
@@ -70,11 +76,11 @@ function DetailPage() {
                 <div className="datail-container">
                     <div className="taskTitleWrapper">
                         <h2>해야 할 일</h2>
-                        <h2>{currentTodo ? currentTodo.task : "제목을 불러올 수 없습니다"}</h2>
+                        <h2>{currentTodo ? currentTodo.title : "제목을 불러올 수 없습니다"}</h2>
                     </div>
                     <div className="taskBodyWrapper">
                         <h2>내용</h2>
-                        <h2>{currentTodo ? currentTodo.taskBody : "내용을 불러올 수 없습니다"}</h2>
+                        <h2>{currentTodo ? currentTodo.content : "내용을 불러올 수 없습니다"}</h2>
                     </div>
                 </div>)}
 
