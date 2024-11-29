@@ -6,6 +6,7 @@ import Input from '../Components/Input';
 import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import api from '../Apis/axios-auth';
+import { useMutation } from '@tanstack/react-query'
 
 function RegisterPage() {
     const navigate = useNavigate();
@@ -18,23 +19,41 @@ function RegisterPage() {
         resolver: yupResolver(schema)
     });
 
-    const onSubmit = async(data) => {
+
+    const SignUpMutate = async(data)=>{
         try{
-            const response = await api.post('/auth/register',{
+            const response = await api.post('auth/register',{
                 email:data.email,
                 password:data.password,
                 passwordCheck:data.passwordCheck
-            });
-            console.log('회원가입 완료')
-            navigate('/login');
-
+            })
+            return response;
         }
         catch(error){
-            console.log(error)
+            console.log(error);
         }
-        // e.preventDefault();
-        console.log('data:', data)
-    };
+    }
+
+
+
+    const {mutate, isLoading,isError,Error} = useMutation({
+        mutationFn: SignUpMutate,
+        onSuccess:()=>{
+            console.log('회원가입 성공');
+            navigate('/login')
+        },
+        onError:()=>{
+            console.log('회원가입 에러')
+            alert('회원가입 실패')
+        }
+    })
+
+
+   
+    //// data는 form에서 입력받은 값들을 담고 있습니다
+    const onSubmit = (data)=>{
+        mutate(data)
+    }
 
 
     console.log('email value:', watch('email'));

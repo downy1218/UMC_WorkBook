@@ -4,6 +4,7 @@ import { validateLogin } from '../Utils/validate';
 import useForm from '../Hooks/useForm';
 import api from '../Apis/axios-auth';
 import { useNavigate } from 'react-router-dom';
+import { useMutation } from '@tanstack/react-query';
 
 function LoginPage(){
     const navigate = useNavigate();
@@ -23,13 +24,14 @@ function LoginPage(){
         onSubmit(login.values)
     };
 
-    const onSubmit = async(data)=>{
+
+
+    const LoginMutate = async(data)=>{
         try{
             const response = await api.post('/auth/login',{
                 email:data.email,
                 password:data.password
             });
-
             if(response.data.accessToken && response.data.refreshToken){
                 localStorage.setItem('accessToken',response.data.accessToken);
                 localStorage.setItem('refreshToken',response.data.refreshToken);
@@ -39,16 +41,35 @@ function LoginPage(){
             }else{
                 console.log('토큰저장실패')
             }
+            return response;
+        }
+        catch(error){
+            throw error
+        }
+    };
+    
+    
+    const {mutate} = useMutation({
+        mutationFn:LoginMutate,
+        onSuccess:()=>{
             console.log('로그인 성공')
             navigate('/');
             window.location.reload(); //로그인 후 페이지 새로고침 안해도 reload해줌
+        },
+        onError:()=>{
+            console.log('로그인 실패')
+           
         }
-        catch(error){
-            console.log('로그인 실패');
-            alert('이메일 또는 비밀번호가 잘못되었습니다')
-            
-        }
-    };
+    });
+
+
+
+
+
+
+    const onSubmit =(data)=>{
+        mutate(data)
+    }
     
 
     return(
