@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import * as D from '../Styles/PosterStyle.js';
-import React from 'react';
+import React, { useState } from 'react';
 import useCustomInfo from '../Hooks/useCustomInfo.js';
 import { IoTicket } from "react-icons/io5";
 import { useQuery } from '@tanstack/react-query';
@@ -11,8 +11,7 @@ function DetailInfo() {
   const baseUrl = 'https://image.tmdb.org/t/p/original'; //이미지크기 돌려줘야함(화질저하방지)
   const { movie_id, category } = useParams();
 
-
-  
+  const [star,setStar] = useState('⭐');
   const { data: movieCredit, isError: creditError, isLoading: creditLoading } = useQuery({
     queryKey:['credit',movie_id],
     queryFn:()=>MovieApi.getCredit(movie_id)
@@ -22,7 +21,13 @@ function DetailInfo() {
     queryKey:['movieDetail',movie_id],
     queryFn:()=>MovieApi.getDetail(movie_id)
   });
+  const { data: movieReview, isError: ReviewError, isLoading: ReviewLoading } = useQuery({
+    queryKey:['movieReviews',movie_id],
+    queryFn:()=>MovieApi.getReview(movie_id)
+  });
   
+  
+
   console.log('movieCredit:',movieCredit);
   console.log('movieDetail:',movieDetail);
   const castData = movieCredit?.cast;
@@ -78,7 +83,7 @@ function DetailInfo() {
             <h1>{movieDetail?.title}</h1>
             <p>{movieDetail?.original_title}</p>
           </D.Titles>
-          <button>예매하기</button>
+          {/* <button>예매하기</button> */}
         </D.TitlesContainer>
 
         <D.OverView>
@@ -120,6 +125,29 @@ function DetailInfo() {
               )
             })
           )}
+        </div>
+      </div>
+
+      <hr/>
+
+      <div>
+        <h2>reviews</h2>
+        <div style={{color:'white',marginTop:'50px'}}>
+          {movieReview?.slice(1,9).map((review,index)=>{
+            const starRating = parseInt(review.author_details.rating)
+            return(
+              <div key={review.id}>
+                <D.Review>
+                  <D.ReviewProfile src={review.author_details.avatar_path ? `${baseUrl}${review.author_details.avatar_path}` : ''}></D.ReviewProfile>
+                </D.Review>
+                <p>{star.repeat(starRating)}</p>
+                <h2>{review.author_details.name ? review.author_details.name :'No Name' } : </h2>
+                <p>{review?.content}</p>
+                <hr/>
+              </div>
+            )
+          })}
+          
         </div>
       </div>
     </D.Credit>

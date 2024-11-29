@@ -7,7 +7,7 @@ function Nav() {
     const [logStatus, setLogStatus] = useState(false);
     const [userMail, setUserMail] = useState('');
     const navigate = useNavigate();
-
+    const gotoMain = ()=>{navigate('/')};
     //로그인 상태가 변할 때 정보를 가져옴
     useEffect(() => {
         const access = localStorage.getItem('accessToken'); //토큰가져옴
@@ -33,7 +33,7 @@ function Nav() {
         else{
             setLogStatus(false);
         }
-    }, []);
+    }, [logStatus]);
 
     const handlelogOut = () => {
         localStorage.removeItem('accessToken');
@@ -46,10 +46,15 @@ function Nav() {
 
     return (
         <div>
-            <Link to='/'>
-                <N.NavTitle>DANCHA</N.NavTitle>
-            </Link>
-            
+            <div>
+                <N.NavTitle onClick={gotoMain}>
+                    <p style={{fontSize:'40px'}}>D</p>
+                    <p style={{fontSize:'38px'}}>A</p>
+                    <p style={{fontSize:'36px'}}>N</p>
+                    <p style={{fontSize:'36px'}}>C</p>
+                    <p style={{fontSize:'38px'}}>H</p>
+                    <p style={{fontSize:'40px'}}>A</p>
+                </N.NavTitle>
 
                 { logStatus?
                     <N.NavBtn>
@@ -63,8 +68,7 @@ function Nav() {
                     </N.NavBtn>
                 }
 
-            
-
+            </div>
         </div>
     )
 };

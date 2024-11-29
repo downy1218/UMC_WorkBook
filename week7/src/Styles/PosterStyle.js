@@ -7,6 +7,12 @@ export const GridContainerStyle = styled.div`
     gap: 30px; // 포스터 위 아래 줄 사이 간격
     padding:8px;
 `
+export const NewGridContainerStyle = styled.div`
+    display: flex;
+    margin-top:0px;
+    gap: 30px; // 포스터 위 아래 줄 사이 간격
+    padding:8px;
+`
 
 export const PosterContainer = styled.div`
     // width: 100px; 
@@ -156,4 +162,16 @@ export const ImgContainer = styled.div`
         height:150px;
         object-fit:cover;
     }
+`
+export const Review = styled.div`
+    width:50px;
+    height:50px;
+    display:flex;
+`
+export const ReviewProfile = styled.image`
+    width:100%;
+    height:100%;
+    border-radius:100%;
+    border:2px solid white;
+    object-fit:cover;
 `

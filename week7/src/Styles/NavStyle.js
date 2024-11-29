@@ -12,8 +12,9 @@ export const NavTitle = styled.button`
     font-size: 20px;
     /* display: flex;
     justify-content: start;
-    text-decoration-style: none; 글자 밑에 줄 나타남;;*/
+    text-decoration: none; 글자 밑에 줄 나타남;;*/
     font-weight:bold;
+    display:flex;
 `
 export const NavBtn = styled.div`
     display: flex;
@@ -24,7 +25,7 @@ export const NavBtn = styled.div`
     border: none;
     cursor: pointer;
     margin-right: 25px;
-    /* margin-top: 0; */
+    margin-top: 0; 
     border-radius: 7px;    
     text-decoration-style: none;
 `
