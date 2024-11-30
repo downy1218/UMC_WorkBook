@@ -6,7 +6,7 @@ import { TodoContext } from './Context/todoContext.jsx';
 import Input from "./Components/Input.jsx";
 import { todoApi } from "./Api/todoApis.jsx";
 import { SyncLoader } from 'react-spinners';
-
+import { useQuery,useMutation} from '@tanstack/react-query';
 
 function DetailPage() {
     const [todoDetail, setTodoDetail] = useState([]); //null로 설정:데이터를 아직 불러오지않은 상태
@@ -25,38 +25,24 @@ function DetailPage() {
     console.log('currentTodo.id:',currentTodo.id) //숫자로 나옴
 
 
-    const handleDelete = async() => {
-        try{
-            await delTask(currentTodo.id)
-            navigate('/')
-        }
-        catch(error){
-            console.log('삭제실패오류메세지',error)
-        }
-  
+    const {mutate} = useMutation({
+        mutationFn: (id)=>todoApi.deleteTodo(id),
+        onSuccess: ()=>navigate('/'),
+        onError:console.log('삭제실패')
+    })
+    const {mutate:updateMutate} = useMutation({
+        mutationFn: (id)=>todoApi.updateTodo(id),
+        onSuccess: console.log('수정이 완료되었습니다'),
+        onError:console.log('업뎃실패')
+    })
+
+    const handleDelete = (id)=>{
+        mutate(id)
     }
 
-    const handleUpdate = async() => {
-        if(editText === '' && editBody === '') {
-            alert('제목과 내용을 입력해주세요')
-            return;
-        }
-    
-        try {
-            await updateTask(currentTodo.id);
-            alert("수정이 완료됐습니다!");
-            setEditing(null);
-            
-            // 데이터 다시 불러오기
-            const data = await todoApi.getTodoById(currentTodo.id);
-            console.log(data);
-            setTodoDetail(data)
-        
-        } catch(error) {
-            console.log('수정 실패:', error);
-            alert('수정에 실패했습니다.');
-        }
-    };
+    const handleUpdate = (id)=>{
+        updateMutate(id)
+    }
 
     //개별 투두리스트 조회
     useEffect(() => {

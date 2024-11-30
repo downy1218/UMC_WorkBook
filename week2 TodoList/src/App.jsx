@@ -7,9 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import { createContext} from "react";
 import { todoApi } from "./Api/todoApis";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useQuery,useMutation} from '@tanstack/react-query';
 
 
 function App() {
+  
   const navigate = useNavigate();
   const gotoDetail = (todoId)=> {console.log("Moving to detail with id:", todoId); navigate(`/todoDetail/${todoId}`)};
 
@@ -32,28 +35,37 @@ function App() {
     updateTask
   } = useContext(TodoContext);
 
-  
-    //초기 모든 투두리스트 데이터 불러오기
+
+    const {data, isLoading,isError} = useQuery({
+      queryKey:['fetchingAllTodos'],
+      queryFn:todoApi.getAllTodos
+    });
+    console.log(data)
+
     useEffect(()=>{
-      const fetchAllTodo = async()=>{
-          try{
-              const rawData = await todoApi.getAllTodos();
-              console.log(rawData)
-              const [data] = rawData
-              console.log(data)
-              if(Array.isArray(rawData)){
-                  console.log('받아온데이터:',rawData);
-                  setTodo(rawData); //모든데이터집어넣기
-                  console.log('todo:',todo);
-                  console.log(Array.isArray(todo));
-              }
-          }
-          catch(error){
-              console.log('모든데이터조회실패:',error)
-          }
-      };
-      fetchAllTodo();
-  },[])
+      if(data){
+        setTodo(data)
+      }
+    },[])
+
+  //   //초기 모든 투두리스트 데이터 불러오기
+  //   useEffect(()=>{
+  //     const fetchAllTodo = async()=>{
+  //         try{
+  //             const rawData = await todoApi.getAllTodos();
+  //             console.log(rawData)
+
+  //             if(Array.isArray(rawData)){
+  //                 setTodo(rawData); //모든데이터집어넣기
+  //                 console.log('todo:',todo);
+  //             }
+  //         }
+  //         catch(error){
+  //             console.log('모든데이터조회실패:',error)
+  //         }
+  //     };
+  //     fetchAllTodo();
+  // },[])
 
   return (
     <>
@@ -75,7 +87,7 @@ function App() {
       </form>
 
       <div className="taskMenu">
-        {Array.isArray(todo)&&todo.map((a, index) => {
+        {todo && Array.isArray(todo)&&todo.map((a, index) => {
           return (
             <div key={a.id} >
               {editing !== a.id && (
@@ -110,7 +122,7 @@ function App() {
         })}
       </div>
 
-    </>
+      </>
   )
 }
 
