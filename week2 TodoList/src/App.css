@@ -65,8 +65,10 @@
 
 .taskTitleWrapper{
     display: flex;
+    flex-direction: column;
     
 }
 .taskBodyWrapper{
     display: flex;
+    flex-direction: column;
 }

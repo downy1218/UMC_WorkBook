@@ -10,45 +10,27 @@ export const todoApi = {
             const response = await fetch(`${baseUrl}/todo`);
             console.log('API 응답 상태:', response.status); //서버상태확인
 
-            const data =  await response.json();
-            console.log('api받아온데이터',data[0])
-            console.log('API 응답 전체:', response);
+            const rawData =  await response.json();
+            console.log('받아온 전체데이터',rawData);
+            const [data] = rawData //이중배열 첫 번째 요소만 추출해서 data라는 변수에 할당
+            console.log('받아온 데이터 안쪽:', data); //내가 서버에 추가한 리스트 데이터들
             return data;
         }
         catch(error){
             console.log('전체 리스트 조회 실패:',error)
         }
     },
-    // getAllTodos: async() => {
-    //     try {
-    //         const response = await fetch(`${baseUrl}/todo`);
-    //         console.log('Response status:', response.status);
-            
-    //         // response의 실제 내용 확인
-    //         const responseText = await response.text();
-    //         console.log('Raw response:', responseText);
-            
-    //         // 텍스트를 JSON으로 파싱 시도
-    //         try {
-    //             const data = JSON.parse(responseText);
-    //             console.log('Parsed data:', data);
-    //             return data;
-    //         } catch (parseError) {
-    //             console.log('JSON 파싱 에러:', parseError);
-    //             console.log('파싱 실패한 데이터:', responseText);
-    //         }
-    //     }
-    //     catch(error) {
-    //         console.log('전체 리스트 조회 실패:', error);
-    //         throw error;
-    //     }
-    // },
 
     //id별 조회
     getTodoById: async(id)=>{
         try{
-            const response = await fetch(`${baseUrl}/todo/${id}`);
-            return await response.json();
+            const idToNum = parseInt(id)
+            console.log('요청하는id:',id)
+            console.log('요청 URL:', `${baseUrl}/todo/${idToNum}`);
+
+            const response = await fetch(`${baseUrl}/todo/${idToNum}`);
+            console.log(response)
+            return response.json();
         }
         catch(error){
             console.log("개별 리스트 조회 실패:",error)
@@ -82,6 +64,10 @@ export const todoApi = {
                 },
                 body:JSON.stringify(myTodo)
             })
+            const data =  await response.json(); //response.json()도 Promise를 반환하기 때문에 await가 필요
+            return data
+            console.log("Updated todo response:", response);
+            console.log(data)
         }
         catch(error){
             console.log('투두수정실패:',error)
@@ -94,9 +80,10 @@ export const todoApi = {
             const response = await fetch(`${baseUrl}/todo/${id}`,{
                 method:'DELETE'
             })
-            return await response.json();
+            return await response.text();
         }
         catch(error){
+            if (!response.ok) throw new Error("할 일 삭제에 실패했습니다.");
             console.log('투두삭제실패:',error)
         }
     }

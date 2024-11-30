@@ -5,67 +5,88 @@ import React, { useContext, useEffect, useState } from 'react';
 import { TodoContext } from './Context/todoContext.jsx';
 import Input from "./Components/Input.jsx";
 import { todoApi } from "./Api/todoApis.jsx";
-import {SyncLoader} from 'react-spinners';
+import { SyncLoader } from 'react-spinners';
 
 
 function DetailPage() {
-    const [todoDetail,setTodoDetail] = useState(null); //null로 설정:데이터를 아직 불러오지않은 상태
+    const [todoDetail, setTodoDetail] = useState([]); //null로 설정:데이터를 아직 불러오지않은 상태
     const navigate = useNavigate();
     const { todoId } = useParams();//url에서 가져온것
-    console.log("todoId:", todoId) //왜 undefined?, 문자열로출력
+    console.log("todoId:", todoId) // 문자열로출력
 
-    const { todo,
+    const { todo,setTodo,
         editing, setEditing,
         editText, setEditText,
         editBody, setEditBody,
         delTask, updateTask
     } = useContext(TodoContext);
 
-    const currentTodo = todo?.find(item => item.id === parseInt(todoId)); //params로 불러온 아이디와 같은 투두 찾기(숫자)
-    console.log(currentTodo.id) //숫자로 나옴
-    const handleDelete = () => {
-        delTask(currentTodo.id)
-        navigate('/')
+    const currentTodo = todo.find(item => item.id === parseInt(todoId)); //params로 불러온 아이디와 같은 투두 찾기(숫자)
+    console.log('currentTodo.id:',currentTodo.id) //숫자로 나옴
+
+
+    const handleDelete = async() => {
+        try{
+            await delTask(currentTodo.id)
+            navigate('/')
+        }
+        catch(error){
+            console.log('삭제실패오류메세지',error)
+        }
+  
     }
-    
-    const handleUpdate = ()=>{
-        updateTask(currentTodo.id)
-        if(editText===''&&editBody===''){
+
+    const handleUpdate = async() => {
+        if(editText === '' && editBody === '') {
             alert('제목과 내용을 입력해주세요')
-        }else{
-            alert("수정이 완료됐습니다!")
+            return;
+        }
+    
+        try {
+            await updateTask(currentTodo.id);
+            alert("수정이 완료됐습니다!");
+            setEditing(null);
+            
+            // 데이터 다시 불러오기
+            const data = await todoApi.getTodoById(currentTodo.id);
+            console.log(data);
+            setTodoDetail(data)
+        
+        } catch(error) {
+            console.log('수정 실패:', error);
+            alert('수정에 실패했습니다.');
         }
     };
-    
+
     //개별 투두리스트 조회
-    useEffect(()=>{
-        if(!todoId || !todo){
+    useEffect(() => {
+        if (!todoId || !todo) {
             console.log('no todoId')
+            console.log('todo:', todo)
             return;
-            console.log('todo:',todo)
         }
-        const fetchEachTodo = async()=>{
-            try{
-                if(todoId && todo){
-                //각 todoId 별로 가져오기
-                const data = await todoApi.getTodoById(todoId);
-                console.log('가져온data:',data)
-                //가져온 상태로 상태 업데이트
-                setTodoDetail(data);
+        const fetchEachTodo = async () => {
+            try {
+                if (todoId && todo) {
+                    //각 todoId 별로 가져오기
+                    const data = await todoApi.getTodoById(todoId);
+                    console.log('아이디별로 가져온data:', data)
+                    //가져온 상태로 상태 업데이트
+                    setTodoDetail(data);
                 }
             }
-            catch(error){
-                console.log(`${todoId}데이터조회실패:`,error)
+            catch (error) {
+                console.log(`${todoId}데이터조회실패:`, error)
             }
         };
         fetchEachTodo();
-    },[todoId])
+    }, [todoId,todo])
 
 
 
-    if(!todoDetail){
+    if (!currentTodo) {
         <>
-            <SyncLoader color="blue"/>
+            <SyncLoader color="blue" />
             <p>로딩 중..</p>
         </>
     }
@@ -75,12 +96,12 @@ function DetailPage() {
             {editing !== currentTodo.id && (
                 <div className="datail-container">
                     <div className="taskTitleWrapper">
-                        <h2>해야 할 일</h2>
-                        <h2>{currentTodo ? currentTodo.title : "제목을 불러올 수 없습니다"}</h2>
+                        <h3>해야 할 일</h3>
+                        <h2>*{currentTodo ? currentTodo.title : "제목을 불러올 수 없습니다"}</h2>
                     </div>
                     <div className="taskBodyWrapper">
-                        <h2>내용</h2>
-                        <h2>{currentTodo ? currentTodo.content : "내용을 불러올 수 없습니다"}</h2>
+                        <h3>내용</h3>
+                        <h2>*{currentTodo ? currentTodo.content : "내용을 불러올 수 없습니다"}</h2>
                     </div>
                 </div>)}
 
@@ -90,13 +111,15 @@ function DetailPage() {
                     <input
                         className='editingInput'
                         type="text"
-                        defaultValue={currentTodo.task}
-                        onChange={(e) => setEditText(e.target.value)} />
+                        defaultValue={currentTodo.title}
+                        onChange={(e) => setEditText(e.target.value)}
+                        placeholder="제목을 수정하세요" />
                     <input
                         className='editingInput'
                         type="text"
-                        defaultValue={currentTodo.taskBody}
-                        onChange={(e) => setEditBody(e.target.value)} />
+                        defaultValue={currentTodo.content}
+                        onChange={(e) => setEditBody(e.target.value)}
+                        placeholder="내용을 수정하세요" />
                 </div>
             )}
 

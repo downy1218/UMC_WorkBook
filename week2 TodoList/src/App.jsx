@@ -1,11 +1,12 @@
 import './App.css';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useState,useEffect } from 'react';
 import Input from './Components/Input.jsx';
 import Button from './Components/Button.jsx';
 import { TodoContext } from './Context/todoContext.jsx';
 import { useNavigate } from 'react-router-dom';
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-
+import { createContext} from "react";
+import { todoApi } from "./Api/todoApis";
 
 
 function App() {
@@ -31,7 +32,28 @@ function App() {
     updateTask
   } = useContext(TodoContext);
 
-
+  
+    //초기 모든 투두리스트 데이터 불러오기
+    useEffect(()=>{
+      const fetchAllTodo = async()=>{
+          try{
+              const rawData = await todoApi.getAllTodos();
+              console.log(rawData)
+              const [data] = rawData
+              console.log(data)
+              if(Array.isArray(rawData)){
+                  console.log('받아온데이터:',rawData);
+                  setTodo(rawData); //모든데이터집어넣기
+                  console.log('todo:',todo);
+                  console.log(Array.isArray(todo));
+              }
+          }
+          catch(error){
+              console.log('모든데이터조회실패:',error)
+          }
+      };
+      fetchAllTodo();
+  },[])
 
   return (
     <>
@@ -53,7 +75,7 @@ function App() {
       </form>
 
       <div className="taskMenu">
-        {todo.map((a, index) => {
+        {Array.isArray(todo)&&todo.map((a, index) => {
           return (
             <div key={a.id} >
               {editing !== a.id && (
