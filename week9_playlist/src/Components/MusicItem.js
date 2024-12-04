@@ -1,9 +1,12 @@
 import cartItems from "../constants/cartItems";
-import { ChevronDown } from "../constants/icons";
-import { ChevronUp } from "../constants/icons";
+import { ChevronDown,ChevronUp } from "../constants/icons";
 import * as A from '../Styles/NavStyle';
+import { useDispatch } from "react-redux";
+import { increase, decrease } from "../redux/slice";
+
 
 function MusicItem({music}){
+    const dispatch = useDispatch();
     return(
         <A.Container>
             <A.Album>
@@ -16,9 +19,13 @@ function MusicItem({music}){
             </A.MusicInfo>
 
             <A.MusicAmount>
-                <ChevronUp/>
+                <A.IconWrapper onClick={()=>dispatch(increase(music.id))}>
+                    <ChevronUp />
+                </A.IconWrapper>
                 <p>{music.amount}</p>
-                <ChevronDown/>
+                <A.IconWrapper onClick={()=>dispatch(decrease(music.id))}>
+                    <ChevronDown/>
+                </A.IconWrapper>
             </A.MusicAmount>
         </A.Container>
     )
