@@ -18,27 +18,30 @@ export default function InputTodo() {
     };
     const handleSubmit = (e) => {
         e.preventDefault();
-        if(todoList.text.trim() !== ''){
+        if (todoList.text.trim() !== '') {
             dispatch(add(todoList.text))
-        }else{
+        } else {
             alert('할 일을 입력해주세요!')
         }
-        setTodoList({text:''})
+        setTodoList({ text: '' })
     }
     return (
-        <>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <input
-                        type='text'
-                        placeholder='할 일을 입력해주세요'
-                        onChange={handleText}
-                        value={todoList.text}>
-                    </input>
-                    <button type='submit'>+</button>
-                </div>
-            </form>
-            <TodoList/>
-        </>
+        <div style={{display:'flex',justifyContent:'center'}}>
+            <div className='SubmitTodoWrapper'>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <input
+                            id='SubmitInput'
+                            type='text'
+                            placeholder='할 일을 입력해주세요'
+                            onChange={handleText}
+                            value={todoList.text}>
+                        </input>
+                        <button type='submit' className='SubmitBtn'>+</button>
+                    </div>
+                </form>
+                <TodoList />
+            </div>
+        </div>
     )
 }

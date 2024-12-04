@@ -1,0 +1,63 @@
+.SubmitTodoWrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    border: 3px solid rgb(255, 159, 159);
+    width: 550px;
+    border-radius: 15px;
+}
+
+#SubmitInput{
+    margin-top: 10px;
+    width: 300px;
+    height: 40px;
+    padding-left: 15px;
+    border: 2px dotted pink;
+    border-radius: 15px;
+}
+.SubmitBtn{
+    margin-left: 8px;
+    background-color: white;
+    color: blue;
+    border: 2px solid pink;
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+}
+.SubmitBtn:hover{
+    background-color: pink;
+}
+
+
+.ListWrapper{
+    margin-top: 20px;
+    display: flex;
+    justify-content: start;
+}
+
+.ListShow{
+    display: flex;
+}
+#checkBox{
+    margin-right: 10px;
+    width: 30px;
+    height: 30px;
+    
+}
+.delBtnContainer{
+    margin-left: 120px;
+    margin-top: 8px;
+}
+
+.delBtn{
+    background-color: white;
+    border-radius: 20px;
+}
+.delBtn:hover{
+    background-color: pink;
+}
+#todoListText{
+    margin-top: 5px;
+}
