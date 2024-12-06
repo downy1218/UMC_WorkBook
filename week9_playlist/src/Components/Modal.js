@@ -1,13 +1,18 @@
 import * as D from '../Styles/ModalStyle';
-import { useDispatch } from 'react-redux';
+// import { useDispatch } from 'react-redux';
 import { allClear } from '../redux/slice';
-import {close} from '../redux/modalSlice'
-function Modal({isOpen}){
+import {close} from '../redux/modalSlice';
+import { useCart,useModal } from '../redux/store.js';
 
-    const dispatch = useDispatch();
+
+function Modal({isOpen}){
+    // const dispatch = useDispatch();
+
+    const close = useModal((state)=> state.close);
+    const allClear = useCart((state)=> state.allClear);
     const handleShutDown = ()=>{
-        dispatch(allClear());
-        dispatch(close())
+        allClear();
+        close();
     }
     return(
         <D.Container  style={{display: isOpen ? 'block' : 'none',zIndex:50}}>
@@ -19,7 +24,7 @@ function Modal({isOpen}){
                     <hr/>
                     <D.Answer>
                         <D.Yes onClick={()=>handleShutDown()}>네</D.Yes>
-                        <D.No onClick={()=>dispatch(close())}>좀만 더 생각해볼게요</D.No>
+                        <D.No onClick={()=>close()}>좀만 더 생각해볼게요</D.No>
                     </D.Answer>
 
                 </div>

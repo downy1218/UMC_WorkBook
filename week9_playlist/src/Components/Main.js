@@ -1,21 +1,26 @@
 import * as B from '../Styles/NavStyle';
 import React, { useState } from 'react';
 import MusicItem from './MusicItem';
-// import cartItems from "../constants/cartItems";
-import { useDispatch } from 'react-redux';
-import { allClear } from '../redux/slice';
-import { useSelector } from 'react-redux';
+import cartItems from "../constants/cartItems";
+// import { useDispatch } from 'react-redux';
+// import { allClear } from '../redux/slice';
+// import { useSelector } from 'react-redux';
+// import {open,close} from '../redux/modalSlice';
 import Modal from './Modal';
-import {open,close} from '../redux/modalSlice';
+import { useCart,useModal } from '../redux/store.js';
 
 function Main(){
 
-    const dispatch = useDispatch();
-    const {isOpen} = useSelector(state=>state.modalFunctions)
-    const { cartItems,totalPrice} = useSelector(state=>state.musicFunctions);
+    // const dispatch = useDispatch();
+    // const {isOpen} = useSelector(state=>state.modalFunctions)
+    // const { cartItems,totalPrice} = useSelector(state=>state.musicFunctions);
+    const totalPrice = useCart((state)=>state.totalPrice)
+    const cartItems = useCart((state) => state.cartItems);
+    const open = useModal((state) => state.open);
+    const isOpen = useModal((state) => state.isOpen);
 
 
-    console.log(cartItems)
+
     return(
         <div>
             <B.Title>
@@ -38,9 +43,9 @@ function Main(){
 
                 <B.MainBottom>
                     {
-                        cartItems.length ===0 ? <B.AcBtn disabled='true'>장바구니 초기화</B.AcBtn>
+                        cartItems.length ===0 ? <B.AcBtn disabled='true'>장바구니 초기화 완료</B.AcBtn>
                         :
-                        <B.AcBtn onClick={()=>dispatch(open())} disabled ={isOpen}>장바구니 초기화</B.AcBtn>
+                        <B.AcBtn onClick={()=>open()} disabled ={isOpen}>장바구니 초기화</B.AcBtn>
 
                     }
                 </B.MainBottom>

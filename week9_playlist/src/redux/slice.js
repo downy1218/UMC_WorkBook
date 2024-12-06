@@ -51,19 +51,8 @@ export const cartSlice = createSlice({
             state.totalNum = 0; //장바구니 개수 0으로 초기화
             state.totalPrice = 0;
 
-        },
-        //총액 계산 (가격 * 수량)
-        // calculate:(state)=>{
-        //     let amount = 0;
-        //     let total = 0;
-        //     state.cartItems.forEach((item)=>{
-        //         amount += item.amount;
-        //         total += item.amount * item.price;
-        //     });
-        //     state.totalNum = amount;
-        //     state.totalPrice = total;
-        //     console.log(amount)
-        // }
+        }
+
     }
 });
 
