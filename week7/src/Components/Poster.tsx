@@ -4,10 +4,10 @@ import './Poster.css';
 import styled from 'styled-components';
 import * as M from '../Styles/PosterStyle.js';
 import { useNavigate } from 'react-router-dom';
-import Card from './Card.jsx';
+import Card from './Card.js';
 import { useQuery } from '@tanstack/react-query';
 import { MovieApi } from '../Apis/MovieApis.js';
-import QandA from './QandA.jsx';
+import QandA from './QandA.js';
 
 const MoviePosters = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);

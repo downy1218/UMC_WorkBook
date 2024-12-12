@@ -1,6 +1,6 @@
 import Nav from "../Components/Nav.jsx";
 import {Outlet} from "react-router-dom";
-import SideBar from "../Components/Side.jsx";
+import SideBar from "../Components/Side.js";
 
 
 const RootLayout = () => {

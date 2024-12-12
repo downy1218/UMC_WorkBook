@@ -1,0 +1,37 @@
+{
+  "compilerOptions": {
+    /* 기본 설정 */
+    "target": "es2016",
+    "module": "commonjs",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "jsx": "react-jsx",
+
+    /* 모듈 해석 설정 */
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
+
+    /* 엄격한 타입 체크 */
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "noEmit": true,
+
+    /* 소스맵과 출력 설정 */
+    "sourceMap": true,
+    "outDir": "./dist",
+
+    /* JavaScript 지원 */
+    "allowJs": true,
+    "skipLibCheck": true,
+
+    /* 프로젝트 설정 */
+    "incremental": true,
+    "tsBuildInfoFile": "./.tsbuildinfo"
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
+}

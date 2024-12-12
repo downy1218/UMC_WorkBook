@@ -1,6 +1,17 @@
 import styled from "styled-components";
 
-function Input({ type, register, placeholder }) {
+interface InputProps {
+    type:string;
+    register:{
+        name:string;
+        onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
+        onBlur: (event: React.FocusEvent<HTMLInputElement>) => void;
+        ref: React.Ref<HTMLInputElement>;
+    }
+    placeholder:string;
+}
+
+function Input({ type, register, placeholder }:InputProps): JSX.Element{
     return (
         <div>
             <InputStyle {...register} type={type} placeholder={placeholder} />

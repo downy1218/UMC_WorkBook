@@ -1,5 +1,5 @@
 //영화 포스터 낱개 하나 
-import * as M from '../Styles/CategoryStyle.js';
+import * as M from '../Styles/CategoryStyle';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { useState } from 'react';
@@ -38,11 +38,27 @@ const HoverInfo = styled.div`
         font-size:12px;
     }
 `
-function Card({ movie, index }) {
+
+interface Movie{
+    id:string;
+    poster_path: string;
+    original_title: string;
+    title: string;
+    release_date: string;
+    vote_average: number;
+}
+
+interface CardProps {
+    movie:Movie;
+    index:number;
+}
+
+
+function Card({ movie, index }:CardProps):JSX.Element {
     const navigate = useNavigate();
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
-    const [hoveredIndex, setHoveredIndex] = useState(null);
-    const gotoInfo = (movie_id) => { navigate(`/movie/detail/${movie_id}`), console.log('눌림') };
+    const [hoveredIndex, setHoveredIndex] = useState<number|null>(null);
+    const gotoInfo = (movie_id:string) => { navigate(`/movie/detail/${movie_id}`), console.log('눌림') };
 
     return (
         <div movie={movie} index={index} style={{position:'relative'}}>

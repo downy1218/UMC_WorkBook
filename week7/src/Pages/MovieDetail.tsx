@@ -2,13 +2,13 @@
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Card from '../Components/Card.jsx';
+import Card from '../Components/Card.js';
 import styled from 'styled-components';
 import * as M from '../Styles/CategoryStyle.js';
 import { useQuery } from '@tanstack/react-query';
 import { MovieApi } from '../Apis/MovieApis.js';
-import * as S from '../Styles/SearchStyle';
-import SkeletonList from '../Components/SkeletonList';
+import * as S from '../Styles/SearchStyle.js';
+import SkeletonList from '../Components/SkeletonList.js';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { ThreeDots } from 'react-loader-spinner';
