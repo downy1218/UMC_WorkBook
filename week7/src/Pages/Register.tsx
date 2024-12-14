@@ -7,6 +7,7 @@ import styled from "styled-components";
 import { useNavigate } from 'react-router-dom';
 import api from '../Apis/axios-auth';
 import { useMutation } from '@tanstack/react-query'
+import { JSX } from 'react';
 
 function RegisterPage() {
     const navigate = useNavigate();

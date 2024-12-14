@@ -2,7 +2,8 @@
 import * as M from '../Styles/CategoryStyle';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { useState } from 'react';
+import { JSX, useState } from 'react';
+import React from 'react';
 
 const MovieImg = styled.img`
 width:100px;
@@ -57,11 +58,11 @@ interface CardProps {
 function Card({ movie, index }:CardProps):JSX.Element {
     const navigate = useNavigate();
     const baseUrl = 'https://image.tmdb.org/t/p/w500';
-    const [hoveredIndex, setHoveredIndex] = useState<number|null>(null);
+    const [hoveredIndex, setHoveredIndex] = useState<number|null>(null); //제네릭타입으로 설정(값을 사용할때 타입 부여)
     const gotoInfo = (movie_id:string) => { navigate(`/movie/detail/${movie_id}`), console.log('눌림') };
 
     return (
-        <div movie={movie} index={index} style={{position:'relative'}}>
+        <div style={{position:'relative'}}>
             <MovieImgHover
                 
                 onMouseEnter={() => setHoveredIndex(index)}

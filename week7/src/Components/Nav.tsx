@@ -1,20 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import * as N from '../Styles/NavStyle.js';
-import api from "../Apis/axios-auth.js";
+import * as N from '../Styles/NavStyle';
+import api from "../Apis/axios-auth";
+import {JSX} from 'react';
 
-function Nav() {
-    const [logStatus, setLogStatus] = useState(false);
-    const [userMail, setUserMail] = useState('');
+function Nav():JSX.Element {
+    const [logStatus, setLogStatus] = useState<boolean>(false);
+    const [userMail, setUserMail] = useState<string>('');
     const navigate = useNavigate();
-    const gotoMain = ()=>{navigate('/')};
+    const gotoMain = ()=>{navigate('/')}; //TypeScript가 navigate 함수의 타입을 자동 추론(타입지정 불필요)
+
+    //api.get 요청의 응답 데이터를 안전하게 다루기 위해 인터페이스나 타입을 정의
+    interface UserData{
+        email:string;
+    }
+
     //로그인 상태가 변할 때 정보를 가져옴
     useEffect(() => {
         const access = localStorage.getItem('accessToken'); //토큰가져옴
+        //access가 null이 아닌 경우
         if (access) {
             const response = async () => {
                 try {
-                    const userData = await api.get('/user/me', {
+                    const userData = await api.get<UserData>('/user/me', {
                         headers: {
                             Authorization: `Bearer ${access}`
                         }
@@ -30,12 +38,13 @@ function Nav() {
             };
             response(); //함수 호출을 해야함
         }
+        //null인 경우
         else{
             setLogStatus(false);
         }
     }, [logStatus]);
 
-    const handlelogOut = () => {
+    const handlelogOut = ():void => {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         setLogStatus(false);

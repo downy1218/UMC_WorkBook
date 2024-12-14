@@ -5,9 +5,33 @@ import useCustomInfo from '../Hooks/useCustomInfo.js';
 import { IoTicket } from "react-icons/io5";
 import { useQuery } from '@tanstack/react-query';
 import { MovieApi } from '../Apis/MovieApis.js';
+import { JSX } from 'react';
+import { string } from 'yup';
 
+interface CrewMember{
+  cast_id:number;
+  profile_path:string;
+  character:string;
+  original_name:string;
+  job:string;
+}
 
-function DetailInfo() {
+interface AuthorDetails {
+  avatar_path: string | null;  // 이미지 경로가 없을 수 있으므로 null도 허용
+  rating: string;             // 별점 정보
+  name: string | null;        // 이름이 없을 수 있으므로 null도 허용
+}
+
+interface Review{
+  id:number;
+  author_details:AuthorDetails;
+  avatar_path:string;
+  rating:string;
+  name:string;
+  content:string;
+}
+
+function DetailInfo():JSX.Element {
   const baseUrl = 'https://image.tmdb.org/t/p/original'; //이미지크기 돌려줘야함(화질저하방지)
   const { movie_id, category } = useParams();
 
@@ -32,7 +56,7 @@ function DetailInfo() {
   console.log('movieDetail:',movieDetail);
   const castData = movieCredit?.cast;
   const crewData = movieCredit?.crew;
-  const director = movieCredit?.crew?.find(crew => crew.job === 'Director'); //감독정보 따로 확인
+  const director = movieCredit?.crew?.find((crew:CrewMember) => crew.job === 'Director'); //감독정보 따로 확인
 
 
   if (creditLoading || detailLoading) {
@@ -112,7 +136,7 @@ function DetailInfo() {
         <h1>출연</h1>
         <div style={{display:'grid',gridTemplateColumns:'repeat(7,1fr)'}}>
           {castData&&(
-            castData.slice(0,10).map((actor)=>{
+            castData.slice(0,10).map((actor:CrewMember)=>{
               return(
                 <D.ImgContainer key={actor.cast_id}>
                   <img
@@ -133,12 +157,13 @@ function DetailInfo() {
       <div>
         <h2>reviews</h2>
         <div style={{color:'white',marginTop:'50px'}}>
-          {movieReview?.slice(1,9).map((review,index)=>{
+          {movieReview?.slice(1,9).map((review:Review,index:number)=>{
             const starRating = parseInt(review.author_details.rating)
             return(
               <div key={review.id}>
                 <D.Review>
-                  <D.ReviewProfile src={review.author_details.avatar_path ? `${baseUrl}${review.author_details.avatar_path}` : ''}></D.ReviewProfile>
+                  <D.ReviewProfile src={review.author_details.avatar_path ? `${baseUrl}${review.author_details.avatar_path}` : ''}>
+                  </D.ReviewProfile>
                 </D.Review>
                 <p>{star.repeat(starRating)}</p>
                 <h2>{review.author_details.name ? review.author_details.name :'No Name' } : </h2>

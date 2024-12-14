@@ -1,9 +1,9 @@
 import Nav from "../Components/Nav.jsx";
 import {Outlet} from "react-router-dom";
 import SideBar from "../Components/Side.js";
+import { JSX } from 'react';
 
-
-const RootLayout = () => {
+const RootLayout = ():JSX.Element => {
     return (
         <>
             <Nav/>

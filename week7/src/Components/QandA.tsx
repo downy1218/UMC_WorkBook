@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import {JSX} from 'react';
 
 const Wrapper = styled.div`
     margin-left:120px;
@@ -26,8 +27,13 @@ const Container = styled.div`
     }
 `
 
-function QandA() {
-    const [questions, setQuestions] = useState([
+interface Question{
+    id:number;
+    title:string;
+}
+
+function QandA():JSX.Element{
+    const [questions, setQuestions] = useState<Question[]>([
         {
             id: 1,
             title: "멤버십을 해지하려면 어떡해야 하나요?"

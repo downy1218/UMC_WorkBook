@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import Skeleton from '../Components/Skeleton';
 import SkeletonList from '../Components/SkeletonList';
 import useDebounce from '../Hooks/Debounce';
-
+import { JSX } from 'react';
 
 const NoMovie = styled.div`
     display:flex;

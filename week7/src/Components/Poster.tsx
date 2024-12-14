@@ -8,14 +8,28 @@ import Card from './Card.js';
 import { useQuery } from '@tanstack/react-query';
 import { MovieApi } from '../Apis/MovieApis.js';
 import QandA from './QandA.js';
+import {JSX} from 'react';
 
-const MoviePosters = () => {
-  const [hoveredIndex, setHoveredIndex] = useState(null);
+
+interface Movie{
+  id:string;
+  poster_path: string;
+  original_title: string;
+  title: string;
+  release_date: string;
+  vote_average: number;
+}
+// interface MovieData {
+//   results: Movie[];
+// }
+const MoviePosters = ():JSX.Element => {
+  const [hoveredIndex, setHoveredIndex] = useState<number|null>(null);
   const navigate = useNavigate();
   const baseUrl = 'https://image.tmdb.org/t/p/w500';
-  const [page,setPage] = useState(1);
-
-  const {isPending, isLoading, data:movie} = useQuery({
+  const [page,setPage] = useState<number>(1);
+  
+  //React Query에서 데이터의 타입을 명시
+  const {isPending, isError, data:movie} = useQuery<Movie[]>({
     queryKey:['movies',page], 
     queryFn:()=>MovieApi.getHotNow(page),
     placeholderData: (previousData) => previousData //이전 페이지의 데이터를 계속 보여줌, 새 데이터가 도착하면 자연스럽게 교체됨

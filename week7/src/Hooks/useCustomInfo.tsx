@@ -1,7 +1,7 @@
 import { axiosInstance } from '../Apis/axios-instance.js';
 import { useEffect, useState } from 'react';
 
-const useCustomInfo = (url) => {
+const useCustomInfo = (url:string) => {
     const [credit, setCredit] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false);

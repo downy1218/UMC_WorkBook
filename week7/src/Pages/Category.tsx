@@ -1,10 +1,18 @@
 import { useState } from 'react';
 import './Category.css';
 import { useNavigate } from 'react-router-dom';
+import { JSX } from 'react';
 
 
-function CategoryPage(){
-    const [category,setCategory] = useState([
+interface Category{
+    id:string;
+    title:string;
+    path:string;
+}
+
+
+function CategoryPage():JSX.Element{
+    const [category,setCategory] = useState<Category[]>([
         {   id:'1',
             title:'현재 상영중인',
             path:'now_playing'

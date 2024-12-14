@@ -168,7 +168,10 @@ export const Review = styled.div`
     height:50px;
     display:flex;
 `
-export const ReviewProfile = styled.image`
+interface ReviewProfileProps {
+    src: string;
+}
+export const ReviewProfile = styled.img<ReviewProfileProps>`
     width:100%;
     height:100%;
     border-radius:100%;

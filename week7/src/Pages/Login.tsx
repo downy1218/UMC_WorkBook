@@ -1,12 +1,19 @@
 import * as L from '../Styles/CategoryStyle';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
 import { validateLogin } from '../Utils/validate';
 import useForm from '../Hooks/useForm';
 import api from '../Apis/axios-auth';
 import { useNavigate } from 'react-router-dom';
 import { useMutation } from '@tanstack/react-query';
+import { JSX } from 'react';
 
-function LoginPage(){
+
+interface LoginData{
+    email:string;
+    password:string;
+}
+
+function LoginPage():JSX.Element{
     const navigate = useNavigate();
     const login = useForm({
         initialValues:{
@@ -18,7 +25,9 @@ function LoginPage(){
 
     console.log(login.getTextInputProps('email'));
 
-    const handleSubmit = (e)=>{
+    //FormEvent는 form 제출과 관련된 모든 이벤트 속성과 메서드를 포함합니다.
+    //preventDefault()와 같은 메서드를 타입 안전하게 사용할 수 있습니다
+    const handleSubmit = (e:FormEvent<HTMLFormElement>)=>{
         e.preventDefault();
         console.log(login.values.email,login.values.password)
         onSubmit(login.values)
@@ -26,7 +35,7 @@ function LoginPage(){
 
 
 
-    const LoginMutate = async(data)=>{
+    const LoginMutate = async(data:LoginData)=>{
         try{
             const response = await api.post('/auth/login',{
                 email:data.email,
@@ -67,7 +76,7 @@ function LoginPage(){
 
 
 
-    const onSubmit =(data)=>{
+    const onSubmit =(data:LoginData)=>{
         mutate(data)
     }
     

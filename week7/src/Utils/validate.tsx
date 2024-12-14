@@ -1,8 +1,12 @@
 const emailPattern =  /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
+interface Values{
+    email:string;
+    password:string;
+}
 
 //여기서 values는 {email:'',password:''} 입력하는 객체 값
-function validateUser(values){
+function validateUser(values:Values){
     const errors = {
         email:'',
         password:''
@@ -16,7 +20,7 @@ function validateUser(values){
     return errors;
 };
 
-function validateLogin(values){
+function validateLogin(values:Values){
     return validateUser(values)
 };
 export {validateLogin};

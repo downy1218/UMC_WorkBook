@@ -12,7 +12,7 @@ import SkeletonList from '../Components/SkeletonList.js';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { useInView } from 'react-intersection-observer';
 import { ThreeDots } from 'react-loader-spinner';
-
+import { JSX } from 'react';
 
 const CardWrapper = styled.div`
   display: flex;

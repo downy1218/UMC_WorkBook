@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { JSX, useState } from 'react';
 
 interface InputProps {
     type:string;
